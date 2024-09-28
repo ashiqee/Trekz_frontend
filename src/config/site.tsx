@@ -1,29 +1,26 @@
 export type SiteConfig = typeof siteConfig;
-
+import { Bell, House, LayoutGrid } from "lucide-react";
+import NotificationModal from "@/components/modal/NotificationModal"
 export const siteConfig = {
   name: "Next.js + NextUI",
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
     {
       label: "Home",
+      icon: <House size={20}/>,
       href: "/",
     },
     {
-      label: "Docs",
+      label: "Menu",
+      icon: <LayoutGrid size={20} />,
       href: "/docs",
     },
     {
-      label: "Pricing",
-      href: "/pricing",
+      label: "Notification",
+      icon: <Bell />,
+      modal: <><NotificationModal icon={<Bell size={20} />}/></>,
     },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
+    
   ],
   navMenuItems: [
     {

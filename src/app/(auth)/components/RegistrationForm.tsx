@@ -6,15 +6,14 @@ import TRForm from '@/components/forms/TRFrom';
 import TRInput from '@/components/forms/TRInput';
 
 
-const RegistrationForm = ({role}:{role:string}) => {
+const RegistrationForm = () => {
 
 
     
     const onSubmit = async (data:any)=>{
-const userRole = role;
+
 const userData ={
     ...data,
-    userRole,
     profilePhoto:"asda"
 }
 

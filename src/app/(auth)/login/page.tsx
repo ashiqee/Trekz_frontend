@@ -50,9 +50,10 @@ const LoginPage = () => {
           shadow="md"
         >
           <CardBody className="p-10 min-w-[40vw] md:p-20 2xl:px-40">
-            <div className=" text-center pb-10">
-             <Link href={'/'}> <h2 className="text-3xl font-bold uppercase">ASBAR Academy</h2></Link>
-              <h3>Login Now</h3>
+            <div className=" text-center pb-5 ">
+             <Link href={'/'}> <h2 className="text-3xl font-bold uppercase">Trekz</h2></Link>
+             <small>Travel trips & Destination guides</small>
+              <h3 className="mt-5 text-xl">Login Now</h3>
             </div>
 
             <TRForm

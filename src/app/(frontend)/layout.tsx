@@ -4,7 +4,7 @@ import { Navbar } from "@/components/shared/navbar";
 
 const Frontendlayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div>
+    <div >
       <Navbar />
       {children}
     </div>

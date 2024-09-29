@@ -1,5 +1,6 @@
+import Login from "../components/Login";
 
-import Login from "../(auth)/components/Login";
+
 
 
 const LoginPage = () => {

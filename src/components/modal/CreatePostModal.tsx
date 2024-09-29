@@ -9,6 +9,7 @@ import {
   useDisclosure,
   Button,
 } from "@nextui-org/react";
+import { Camera, Images, Smile } from "lucide-react";
 
 const CreateNewPostModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -28,6 +29,12 @@ const CreateNewPostModal = () => {
       >
         <p>Create New Post</p>
         <p className="p-2 rounded-xl border dark:bg-slate-700/75 bg-sky-100/45 min-w-5xl w-full">create new post</p>
+
+        <div className="flex text-sm gap-2 items-center md:gap-8">
+           <p className="flex items-center hover:bg-slate-600/45 rounded-md px-2 p-1"> <Images className="text-green-600" /> Photo/video</p>
+           <p className="flex items-center  hover:bg-slate-600/45 rounded-md px-2 p-1"> <Smile className="text-yellow-600"/> Feeling/Activity</p>
+           <p className="flex items-center  hover:bg-slate-600/45 rounded-md px-2 p-1"> <Camera className="text-red-600" /> Live Stream</p>
+        </div>
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

@@ -16,20 +16,20 @@ const MyProfile = () => {
       <div className="
       absolute inset-0
        dark:bg-gradient-to-r from-slate-900/15 to-slate-900/70 justify-center flex flex-col ">
-        <section className="max-w-7xl flex justify-between items-center w-full mx-auto">
+        <section className="max-w-7xl flex justify-between items-center w-full px-4 md:mx-auto">
           <div className="flex items-center gap-6">
             <Image
-              className="w-40 h-40 shadow hover:shadow-lg shadow-primary-300 rounded-full"
+              className="md:w-40 md:h-40 w-24 shadow hover:shadow-lg shadow-primary-300 rounded-full"
               src="https://cdn.basedlabs.ai/c500fd1b-831b-4f17-8b75-37b4e9a68fca"
             />
             <div>
-              <h3 className="text-3xl">{"Name Profile"}</h3>
+              <h3 className="text-xl md:text-3xl">{"Name Profile"}</h3>
               <p className="text-sm font-extralight">@{"userName"}</p>
             </div>
           </div>
 
           <div className="flex flex-col items-center gap-6">
-            <div className="flex gap-6 items-center">
+            <div className="flex gap-2 md:gap-6 items-center">
               <Tooltip content="Facebook">
                 <button className=" bg-slate-400/40 p-1.5  rounded-full ">
                   <Facebook

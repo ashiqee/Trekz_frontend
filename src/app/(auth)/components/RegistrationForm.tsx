@@ -2,6 +2,7 @@ import { Button } from '@nextui-org/button';
 import React from 'react';
 import Link from 'next/link';
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import TRForm from '@/components/forms/TRFrom';
 import TRInput from '@/components/forms/TRInput';
 import registrationValidation from '@/schemas/register.schema';

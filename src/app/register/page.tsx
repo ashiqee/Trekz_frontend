@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import { Card as NextUiCard, CardBody} from "@nextui-org/react";
 import Link from "next/link";
 
-import RegistrationForm from "../components/RegistrationForm";
+import RegistrationForm from "../(auth)/components/RegistrationForm";
+
+
 const RegisterPage = () => {
   
 

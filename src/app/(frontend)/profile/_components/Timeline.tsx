@@ -1,3 +1,4 @@
+
 import PostCard from "@/components/cards/PostCard";
 import CreateNewPostModal from "@/components/modal/CreatePostModal";
 

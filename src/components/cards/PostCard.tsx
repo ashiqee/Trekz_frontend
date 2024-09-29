@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { Avatar, Divider, Image, Input } from "@nextui-org/react";
 import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";

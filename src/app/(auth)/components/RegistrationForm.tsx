@@ -29,7 +29,7 @@ const userData ={
    
         //! Only for development
     defaultValues={{
-      full_name: "Ashiqee",
+      name: "Ashiqee",
       email: "ashiqee@gmail.com",
       mobileNumber: "01614654397",
       password: "123456",

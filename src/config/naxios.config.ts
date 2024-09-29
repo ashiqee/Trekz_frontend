@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 // Default configuration for Nexios
 const defaultConfig: NexiosOptions = {
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_BASE_API,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",

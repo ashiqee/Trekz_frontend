@@ -9,10 +9,20 @@ const RegisterPage = () => {
   
 
   return (
-    <div>
-                <motion.div
-  animate={{ y: [-200, 100, 0] }}
->
+ 
+
+<div className="relative h-screen w-full overflow-hidden">
+  {/* Background video  */}
+  <video
+    autoPlay
+    loop
+    muted
+    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+  >
+    <source src="/video/bg_2_video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <motion.div animate={{ y: [-200, 100, 0] }} className="relative z-10  items-center h-full flex justify-center">
       <NextUiCard
         isBlurred
         className="border-none bg-background/60 dark:bg-default-100/50 "

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import {Tabs, Tab, Card as NextUiCard, CardBody} from "@nextui-org/react";
+import { Card as NextUiCard, CardBody} from "@nextui-org/react";
 import Link from "next/link";
 
 import RegistrationForm from "../components/RegistrationForm";

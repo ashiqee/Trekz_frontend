@@ -1,9 +1,10 @@
 import { Button } from '@nextui-org/button';
 import React from 'react';
 import Link from 'next/link';
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import TRForm from '@/components/forms/TRFrom';
 import TRInput from '@/components/forms/TRInput';
+import registrationValidation from '@/schemas/register.schema';
 
 
 const RegistrationForm = () => {
@@ -24,6 +25,7 @@ const userData ={
 
     return (
         <TRForm
+   
         //! Only for development
     defaultValues={{
       full_name: "Ashiqee",
@@ -31,9 +33,10 @@ const userData ={
       mobileNumber: "01614654397",
       password: "123456",
     }}
+    resolver={zodResolver(registrationValidation)}
     onSubmit={onSubmit}>
 
-<div className='py-3'> <TRInput isRequired label='Full Name' name='full_name' type='text'/></div>
+<div className='py-3'> <TRInput  isRequired label='Full Name' name='name' type='text'/></div>
 <div className='py-3'>     <TRInput isRequired label='Mobile' name='mobileNumber'/></div>
 <div className='py-3'> <TRInput isRequired label='Email' name='email' type='email'/></div>
 <div className='py-3'> <TRInput isRequired label='Password' name='password' type='password'/></div>

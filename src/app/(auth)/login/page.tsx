@@ -12,6 +12,8 @@ import Loading from "@/components/shared/Loading";
 import { useUser } from "@/context/user.provider";
 import TRForm from "@/components/forms/TRFrom";
 import TRInput from "@/components/forms/TRInput";
+import { zodResolver } from "@hookform/resolvers/zod";
+import loginValidation from "@/schemas/login.schema";
 
 const LoginPage = () => {
   const searchParams = useSearchParams();
@@ -74,6 +76,7 @@ const LoginPage = () => {
                 email: "ashiqee@gmail.com",
                 password: "123456",
               }}
+              resolver={zodResolver(loginValidation)}
               onSubmit={onSubmit}
             >
               <div className="py-3">

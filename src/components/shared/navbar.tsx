@@ -12,12 +12,11 @@ import { Input } from "@nextui-org/input";
 import NextLink from "next/link";
 
 import Menubar from "./menubar";
+import NavbarDropdown from "./NavbarDropDown";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
-  GithubIcon,
-
   SearchIcon,
   Logo,
 } from "@/components/icons";
@@ -62,7 +61,7 @@ export const Navbar = () => {
 
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
-          Profile
+          <NavbarDropdown/>
         </NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
@@ -72,9 +71,7 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
+      
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>

@@ -1,5 +1,6 @@
 export type SiteConfig = typeof siteConfig;
 import { Bell, House, LayoutGrid } from "lucide-react";
+
 import NotificationModal from "@/components/modal/NotificationModal"
 export const siteConfig = {
   name: "Next.js + NextUI",

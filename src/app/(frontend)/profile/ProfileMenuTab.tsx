@@ -16,7 +16,7 @@ const ProfileMenuTab = () => {
       ),
     },
     {
-      tabTitle: "Follewers",
+      tabTitle: "Followers",
       tabComponent: (
         <>
           <p>
@@ -104,7 +104,7 @@ const ProfileMenuTab = () => {
 
 <main className="md:flex min-w-7xl my-12 gap-6 mx-4 md:mx-0  justify-between">
     
-<div className="2xl:min-w-[920px] w-full p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">{details.tabComponent}</div>
+<div className="2xl:min-w-[920px] w-full">{details.tabComponent}</div>
 
 {/* new user tab  */}
 <div className="min-w-80 p-4 hidden md:block bg-sky-900/25 dark:bg-slate-800/45 rounded-md">

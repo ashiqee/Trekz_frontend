@@ -17,7 +17,7 @@ const CreateNewPostModal = () => {
   return (
     <>
       <div
-        className="w-full space-y-4 cursor-pointer"
+        className="w-full p-5 space-y-4 cursor-pointer"
         role="button"
         tabIndex={0}
         onClick={onOpen}

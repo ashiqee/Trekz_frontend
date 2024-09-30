@@ -14,7 +14,7 @@ const ImageCard = ({images}:{images:string[]}) => {
           >
             <Image
               alt={`image-${index}`}
-              className="h-[400px] relative z-10 rounded-md w-full object-cover"
+              className={`${images.length===1 && 'h-[400px]'} max-h-[400px] relative z-10 rounded-md w-full object-cover`}
               height={500}
               src={image}
               width={500}
@@ -22,8 +22,8 @@ const ImageCard = ({images}:{images:string[]}) => {
          
           </Link>
         ))}
-           <div className="absolute text-slate-200  p-10  z-50 right-40 bottom-44 2xl:text-5xl font-bold text-3xl">+{images.length-4}</div>
-    
+           {images.length > 4 && <div className="absolute text-slate-200   p-10  z-50 right-[15%] bottom-[12%] 2xl:text-5xl font-bold text-3xl">+{images.length-4}</div>
+    }
         </div>
     );
 };

@@ -2,16 +2,18 @@ import { Button } from "@nextui-org/button";
 import React from "react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 import TRForm from "@/components/forms/TRFrom";
 import TRInput from "@/components/forms/TRInput";
 import registrationValidation from "@/schemas/register.schema";
 import { useUserRegistration } from "@/hooks/auth.hook";
 import Loading from "@/components/shared/Loading";
-import { useRouter } from "next/navigation";
+import { useUser } from "@/context/user.provider";
 
 const RegistrationForm = () => {
   const router = useRouter()
+  const { setIsLoading: userLoading } = useUser();
   const {mutate: handleRegister, isPending,isSuccess }= useUserRegistration()
 
   const onSubmit = async (data: any) => {
@@ -21,11 +23,13 @@ const RegistrationForm = () => {
     };
 
     handleRegister(userData);
+    userLoading(true)
 
 
   };
 
   if(isSuccess){
+    userLoading(false)
       router.push('/profile')
   }
 

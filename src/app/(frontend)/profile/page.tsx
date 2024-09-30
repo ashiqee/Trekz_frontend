@@ -6,18 +6,19 @@ import ProfileMenuTab from "./ProfileMenuTab";
 
 import { useUser } from "@/context/user.provider";
 import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
+import { useEffect } from "react";
 
 const MyProfile = () => {
   const {user, isLoading}= useUser();
 
 
-console.log(user);
+
 
 
   
   return (
     <>
-    {isLoading && <ProfileSkeleton/>}
+    {isLoading || !user?.email && <ProfileSkeleton/>}
   {
     !isLoading &&  <div>
     <div className="

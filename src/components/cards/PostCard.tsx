@@ -1,11 +1,28 @@
 'use client'
 import React from "react";
-import { Avatar, Divider, Image, Input } from "@nextui-org/react";
+import { Avatar, Divider,  Input } from "@nextui-org/react";
 import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
 
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
+import ImageGallery from "./cardsComp/ImagesGallery";
+import VideoCard from "./cardsComp/VideoCard";
 
 const PostCard = () => {
+
+
+const images =[
+  "https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+ 
+]
+
+const videos= [
+  "https://www.youtube.com/embed/AQ6GmpMu5L8", 
+ ]
+
   return (
     <div className="p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
       <div className="px-5">
@@ -38,10 +55,18 @@ const PostCard = () => {
           </p>
           {/* if image here show  */}
           <div>
-            <Image
+
+{videos.length > 0 ? (
+<VideoCard videos={videos} />
+
+)
+:  <ImageGallery images={images} />
+}
+           
+            {/* <Image
               className="object-cover h-full w-full"
               src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            />
+            /> */}
           </div>
           <div className="flex justify-between items-center py-2">
             <p className="flex items-center gap-4">

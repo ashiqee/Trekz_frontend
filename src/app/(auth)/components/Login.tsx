@@ -29,11 +29,13 @@ const LoginContent = () => {
 
     useEffect(() => {
         if (!isPending && isSuccess) {
-            userLoading(false);
+         
             if (redirect) {
                 router.push(redirect);
+                userLoading(false);
             } else {
                 router.push('/');
+                userLoading(false);
             }
         }
     }, [isPending, isSuccess, redirect, router, userLoading]);

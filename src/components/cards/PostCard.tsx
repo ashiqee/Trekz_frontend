@@ -6,6 +6,7 @@ import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
 import ImageGallery from "./cardsComp/ImagesGallery";
 import VideoCard from "./cardsComp/VideoCard";
+import ImageCard from "./cardsComp/ImageCard";
 
 const PostCard = () => {
 
@@ -19,9 +20,7 @@ const images =[
  
 ]
 
-const videos= [
-  "https://www.youtube.com/embed/AQ6GmpMu5L8", 
- ]
+const videos: string | any[]= [ ]
 
   return (
     <div className="p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
@@ -60,13 +59,14 @@ const videos= [
 <VideoCard videos={videos} />
 
 )
-:  <ImageGallery images={images} />
+:  
+<>
+<ImageCard images={images} />
+{/* <ImageGallery images={images} /> */}
+</>
 }
            
-            {/* <Image
-              className="object-cover h-full w-full"
-              src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            /> */}
+         
           </div>
           <div className="flex justify-between items-center py-2">
             <p className="flex items-center gap-4">

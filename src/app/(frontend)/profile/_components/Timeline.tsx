@@ -14,7 +14,7 @@ const Timeline = ({datas}) => {
 
            <div className="grid grid-cols-1 gap-4">
             {
-                datas?.map((item,i)=>(
+                datas?.map((item:any,i:number)=>(
 
                     <PostCard  key={i} post={item}/>
                 ))

@@ -20,7 +20,6 @@ export const registerUser = async (userData: FieldValues) => {
   try {
     const { data } = await nexiosInstance.post<AuthResponse>("/auth/register", userData);
 
-    console.log(data);
 
     if (data.success) {
       cookies().set("accessToken", data?.data?.accessToken);

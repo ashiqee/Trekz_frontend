@@ -3,13 +3,15 @@ import { Button, Image, Tooltip } from "@nextui-org/react";
 import { Facebook, Share2, Star } from "lucide-react";
 
 import ProfileMenuTab from "./ProfileMenuTab";
+
 import { useUser } from "@/context/user.provider";
 import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
 
 const MyProfile = () => {
   const {user, isLoading}= useUser();
 
-  console.log(user)
+
+console.log(user);
 
 
   
@@ -31,7 +33,7 @@ const MyProfile = () => {
          <div className="flex items-center gap-6">
            <Image
              className="md:w-40 md:h-40 w-24 shadow hover:shadow-lg shadow-primary-300 rounded-full"
-             src="https://cdn.basedlabs.ai/c500fd1b-831b-4f17-8b75-37b4e9a68fca"
+             src={user?.profilePhoto}
            />
            <div>
              <h3 className="text-xl md:text-3xl">{user?.name}</h3>

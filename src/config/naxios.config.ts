@@ -2,6 +2,7 @@ import { Nexios } from "nexios-http";
 import { NexiosOptions } from "nexios-http/types/interfaces";
 import { cookies } from "next/headers";
 
+
 // Default configuration for Nexios
 const defaultConfig: NexiosOptions = {
   baseURL: process.env.NEXT_PUBLIC_BASE_API,
@@ -22,7 +23,7 @@ nexiosInstance.interceptors.request.use((config) => {
   if (accessToken) {
     config.headers = {
       ...config.headers,
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `${accessToken}`,
     };
   }
 

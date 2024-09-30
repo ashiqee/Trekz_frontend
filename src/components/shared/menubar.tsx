@@ -13,8 +13,8 @@ const Menubar = () => {
 
   return (
     <ul className="hidden lg:flex gap-4  justify-start ">
-      {siteConfig.navItems.map((item) => (
-        <NavbarItem key={item.href} className="bg-slate-800/40 hover:bg-primary-300 dark:hover:bg-slate-50/40 p-1 px-2.5 rounded-full">
+      {siteConfig.navItems.map((item,i) => (
+        <NavbarItem key={i} className="bg-slate-800/40 hover:bg-primary-300 dark:hover:bg-slate-50/40 p-1 px-2.5 rounded-full">
           <Tooltip content={item.label}  placement="bottom">
             {item.modal ? (
              

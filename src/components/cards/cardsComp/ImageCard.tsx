@@ -14,7 +14,7 @@ const ImageCard = ({images}:{images:string[]}) => {
           >
             <Image
               alt={`image-${index}`}
-              className={`${images.length===1 && 'h-[400px]'} max-h-[400px] relative z-10 rounded-md w-full object-cover`}
+              className={`${images.length >= 2 && 'h-[400px]'} max-h-[400px] relative z-10 rounded-md w-full object-cover`}
               height={500}
               src={image}
               width={500}

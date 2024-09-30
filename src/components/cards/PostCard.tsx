@@ -4,11 +4,10 @@ import { Avatar, Divider,  Input } from "@nextui-org/react";
 import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
 
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
-import ImageGallery from "./cardsComp/ImagesGallery";
 import VideoCard from "./cardsComp/VideoCard";
 import ImageCard from "./cardsComp/ImageCard";
 
-const PostCard = () => {
+const PostCard = ({post}:{post:any}) => {
 
 
 const images =[
@@ -28,14 +27,14 @@ const videos: string | any[]= [ ]
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">
-          <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+          <Avatar src={post?.user?.profilePhoto} />
           <div className="flex justify-between  w-full">
             <p className="flex  font-medium flex-col">
               {" "}
-              {"Ashik Mahmud"}
+              {post?.user?.name}
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">
                 {" "}
-                <Globe size={11} /> published: {"12:20pm"}
+                <Globe size={11} /> published: {post?.createdAt?.slice(0,10)}
               </small>
             </p>
 
@@ -47,22 +46,17 @@ const videos: string | any[]= [ ]
         <section className="space-y-2 py-2">
           {/* if text post available show  */}
           {/* todo condition  */}
-          <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iusto
-            at, reprehenderit totam rem sed dolorem eveniet minima magnam
-            voluptate incidunt recusandae distinctio illum, unde consectetur
-            delectus blanditiis consequuntur nisi.
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: post.postContent }} />
           {/* if image here show  */}
           <div>
 
 {videos.length > 0 ? (
-<VideoCard videos={videos} />
+<VideoCard videos={post?.video} />
 
 )
 :  
 <>
-<ImageCard images={images} />
+<ImageCard images={post?.images} />
 {/* <ImageGallery images={images} /> */}
 </>
 }
@@ -73,15 +67,15 @@ const videos: string | any[]= [ ]
             <p className="flex items-center gap-4">
               <span className="flex gap-1">
                 <ThumbsUp />
-                {"10"}
+                {post?.upVotes?.length}
               </span>
               <span className="flex gap-1">
                 <ThumbsDown />
-                {4}
+                {post?.downVotes?.length}
               </span>
             </p>
 
-            <p className="flex items-center">{22} comments</p>
+            <p className="flex items-center">{post?.comments?.length} comments</p>
           </div>
           {/* comment collection  */}
           <Divider />

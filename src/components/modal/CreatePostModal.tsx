@@ -19,15 +19,21 @@ import { convertToRaw } from "draft-js";
 import TRRichTextEditor from "../forms/TRRichTextEditor";
 
 import { useUser } from "@/context/user.provider";
+import { useCreatePosts } from "@/hooks/posts.hook";
 
 const CreateNewPostModal = () => {
+
   const { user } = useUser();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [editorContent, setEditorContent] = useState("");
 
+  const {mutate: handleCreatePost, isPending,isSuccess }= useCreatePosts()
+
   const [images, setImages] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const [videoId, setVideoId] = useState("");
+
+  
 
   const handleEditorChange = (editorState: any) => {
     const contentState = editorState.getCurrentContent();
@@ -52,16 +58,28 @@ const CreateNewPostModal = () => {
     }
   };
 
-  const handleSubmitPost = () => {
-    const postData = {
+  const handleSubmitPost = async () => {
+    const formData = new FormData();
+
+    const postDetails ={
       user: user!._id,
       postContent: editorContent,
       video: videoId,
-      images: images,
     };
 
-    console.log(postData);
+    formData.append('data', JSON.stringify(postDetails));
+
+    for (let image of images) {
+      formData.append("images", image);
+    }
+
+
+    console.log(formData);
+    
+   handleCreatePost(formData)
   };
+
+  
 
   return (
     <>

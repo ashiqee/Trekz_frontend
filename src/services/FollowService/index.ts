@@ -9,8 +9,6 @@ export const getMyUserData = async () => {
 
   try {
     const { data } = await axiosInstance.get(`/users/${user?._id}`);
-    
-    console.log(data);
   
     return data;
   } catch (error: any) {

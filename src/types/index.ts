@@ -24,6 +24,7 @@ export interface IUser{
   status: string;
   mobileNumber: string;
   profilePhoto: string;
+  isVerified:boolean;
   createdAt?: string;
   updatedAt?: string;
   __v?: number;

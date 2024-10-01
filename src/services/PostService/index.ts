@@ -4,8 +4,8 @@ import { FieldValues } from "react-hook-form";
 import { revalidateTag } from "next/cache";
 
 import axiosInstance from "@/lib/AxiosInstance";
-import nexiosInstance from "@/config/naxios.config";
 import envConfig from "@/config/envConfig";
+import { getCurrentUser } from "../AuthService";
 
 
 export const createAPost = async (formData: FieldValues) => {
@@ -40,3 +40,26 @@ export const createAPost = async (formData: FieldValues) => {
   
   return res.json();
  }
+
+
+ 
+export const getMyPosts = async () => {
+  const user = await getCurrentUser()
+
+try {
+  let fetchOptions = {};
+
+  fetchOptions = {
+    cache: "no-store",
+  };
+
+  const { data } = await axiosInstance.get(`/posts/my/${user?._id}`,fetchOptions);
+  
+  
+
+  return data;
+} catch (error: any) {
+  
+  throw new Error(error.response?.data?.message || error.message || "Error fetching user post data");
+}
+};

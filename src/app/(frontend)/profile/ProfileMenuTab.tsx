@@ -4,16 +4,18 @@ import React, { useState } from "react";
 import Timeline from "./_components/Timeline";
 import Follow from "./_components/Follow";
 import Followers from "./_components/Follower";
+import AboutMe from "./_components/AboutMe";
 
-const ProfileMenuTab = ({ userData }: any) => {
+const ProfileMenuTab = ({ userData ,postsData }: any) => {
   const [isActiveTab, setActiveTab] = useState(0);
+
 
   const tabDatas = [
     {
       tabTitle: "Timeline",
       tabComponent: (
         <>
-          <Timeline datas={[]} />
+          <Timeline datas={postsData} />
         </>
       ),
     },
@@ -33,18 +35,7 @@ const ProfileMenuTab = ({ userData }: any) => {
       tabTitle: "About",
       tabComponent: (
         <>
-          <p>Our customers love this product! See what they have to say:</p>
-          <ul className="list-disc pl-5">
-            <li>Fantastic quality and fast delivery! - Jane Doe</li>
-            <li>Exceeded my expectations. Highly recommended! - John Smith</li>
-          </ul>
-          <p>
-            Want to leave your own review?{" "}
-            <a className="text-blue-500 underline" href="/reviews">
-              Click here
-            </a>{" "}
-            to share your thoughts!
-          </p>
+         <AboutMe/>
         </>
       ),
     },

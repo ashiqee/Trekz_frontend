@@ -3,22 +3,22 @@ import {  useRef,  } from "react";
 const AutoPlayVideo = ({videoUrl}: {videoUrl:string}) => {
   const videoRef = useRef(null);
 
+ 
   return (
     <iframe
       ref={videoRef}
-      className="object-cover h-[400px] w-full"
-      src={videoUrl} // Autoplay if in view
-      title="YouTube video player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      className="object-cover h-[400px] w-full"
+      frameBorder="0"
+      src={`https://www.youtube.com/embed/${videoUrl}`} 
+      title="YouTube video player"
     />
   );
 };
 
-
-const VideoCard = ({videos}:{videos:string[]}) => {
-  return <AutoPlayVideo videoUrl={videos[0] as string } />;
+const VideoCard = ({video}:{video:string}) => {
+  return <AutoPlayVideo videoUrl={video as string } />;
 };
 
 export default VideoCard;

@@ -6,10 +6,25 @@ import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
 import VideoCard from "./cardsComp/VideoCard";
 import ImageCard from "./cardsComp/ImageCard";
+import { useDownvotePost, useUpvotePost } from "@/hooks/posts.hook";
 
 const PostCard = ({post}:{post:any}) => {
+  const { mutate: handleUpvoteToDb, isPending, isSuccess } = useUpvotePost();
+  const { mutate: handleDownvoteToDb } = useDownvotePost();
 
-const videos: string | any[]= [ ]
+  const handleUpvote =( )=>{
+    handleUpvoteToDb(post._id)
+    
+
+  }
+  const handleDownvote =( )=>{
+
+    handleDownvoteToDb(post._id)
+  
+
+
+  }
+
 
   return (
     <div className="p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
@@ -42,8 +57,8 @@ const videos: string | any[]= [ ]
           {/* if image here show  */}
           <div>
 
-{videos.length > 0 ? (
-<VideoCard videos={post?.video} />
+{post?.video?.length > 0 ? (
+<VideoCard video={post?.video} />
 
 )
 :  
@@ -56,16 +71,16 @@ const videos: string | any[]= [ ]
          
           </div>
           <div className="flex justify-between items-center py-2">
-            <p className="flex items-center gap-4">
-              <span className="flex gap-1">
+            <div className="flex items-center gap-4">
+              <button onClick={handleUpvote} className="flex gap-1">
                 <ThumbsUp />
                 {post?.upVotes?.length}
-              </span>
-              <span className="flex gap-1">
+              </button>
+              <button onClick={handleDownvote} className="flex gap-1">
                 <ThumbsDown />
                 {post?.downVotes?.length}
-              </span>
-            </p>
+              </button>
+            </div>
 
             <p className="flex items-center">{post?.comments?.length} comments</p>
           </div>

@@ -74,7 +74,6 @@ const CreateNewPostModal = () => {
     }
 
 
-    console.log(formData);
     
    handleCreatePost(formData)
   };

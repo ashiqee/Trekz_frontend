@@ -2,10 +2,12 @@ import { Nexios } from "nexios-http";
 import { NexiosOptions } from "nexios-http/types/interfaces";
 import { cookies } from "next/headers";
 
+import envConfig from "./envConfig";
+
 
 // Default configuration for Nexios
 const defaultConfig: NexiosOptions = {
-  baseURL: process.env.NEXT_PUBLIC_BASE_API,
+  baseURL: envConfig.baseApi,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",

@@ -8,6 +8,8 @@ import { getCurrentUser } from "../AuthService";
 import axiosInstance from "@/lib/AxiosInstance";
 import envConfig from "@/config/envConfig";
 import nexiosInstance from "@/config/naxios.config";
+import { redirect } from "next/navigation";
+
 
 export const createAPost = async (formData: FieldValues) => {
   try {
@@ -69,6 +71,9 @@ export const getMyPosts = async () => {
 export const upVotetodB = async (postId: any) => {
   const user = await getCurrentUser();
 
+  if(!user){
+    redirect('/login')
+  }
   
   const upVotedata = {
     userId: user?._id,
@@ -92,6 +97,9 @@ export const upVotetodB = async (postId: any) => {
 export const downVotetodB = async (postId: any) => {
   const user = await getCurrentUser();
 
+  if(!user){
+    redirect('/login')
+  }
   
   const downVotedata = {
     userId: user?._id,

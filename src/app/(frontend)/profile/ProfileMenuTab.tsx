@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 
 import Timeline from "./_components/Timeline";
+import Follow from "./_components/Follow";
+import Followers from "./_components/Follower";
 
-const ProfileMenuTab = () => {
+const ProfileMenuTab = ({ userData }: any) => {
   const [isActiveTab, setActiveTab] = useState(0);
 
   const tabDatas = [
@@ -11,55 +13,19 @@ const ProfileMenuTab = () => {
       tabTitle: "Timeline",
       tabComponent: (
         <>
-          <Timeline/>
+          <Timeline datas={[]} />
         </>
       ),
     },
     {
       tabTitle: "Followers",
-      tabComponent: (
-        <>
-          <p>
-            We want you to be completely satisfied with your purchase. If you
-            are not happy, you can return or exchange your item within 30 days
-            of receipt.
-          </p>
-          <ul className="list-disc pl-5">
-            <li>Items must be unused and in their original condition.</li>
-            <li>Refunds will be issued to the original payment method.</li>
-            <li>Exchanges are processed upon receipt of the original item.</li>
-          </ul>
-          <p>
-            For more details, please visit our{" "}
-            <a className="text-blue-500 underline" href="/return-policy">
-              Return Policy
-            </a>{" "}
-            page.
-          </p>
-        </>
-      ),
+      tabComponent: <><Followers followData={userData?.followers} /></>,
     },
     {
       tabTitle: "Follow",
       tabComponent: (
         <>
-          <p>
-            We provide a 1-year warranty on all our products to ensure your
-            satisfaction:
-          </p>
-          <ul className="list-disc pl-5">
-            <li>
-              <strong>Warranty Period:</strong> 1 year from the date of purchase
-            </li>
-            <li>
-              <strong>Coverage:</strong> Manufacturer defects and product
-              malfunctions
-            </li>
-          </ul>
-          <p>
-            If you experience any issues, please contact our customer support
-            for assistance with warranty claims.
-          </p>
+          <Follow followData={userData?.follow} />
         </>
       ),
     },
@@ -92,8 +58,10 @@ const ProfileMenuTab = () => {
         {tabDatas?.map((data, i) => (
           <li
             key={i}
-            className={`${isActiveTab === i && 
-                "bg-gradient-to-b dark:from-slate-900/45 dark:to-slate-900 bg-sky-900/75 rounded-t-[20px] text-white  "} 
+            className={`${
+              isActiveTab === i &&
+              "bg-gradient-to-b dark:from-slate-900/45 dark:to-slate-900 bg-sky-900/75 rounded-t-[20px] text-white  "
+            } 
                md:font-bold text-center  p-1.5 px-4 md:px-10 `}
           >
             <button onClick={() => setActiveTab(i)}>{data.tabTitle}</button>
@@ -101,16 +69,14 @@ const ProfileMenuTab = () => {
         ))}
       </ul>
 
+      <main className="md:flex min-w-7xl my-12 gap-6 mx-4 md:mx-0  justify-between">
+        <div className="2xl:min-w-[920px] w-full">{details.tabComponent}</div>
 
-<main className="md:flex min-w-7xl my-12 gap-6 mx-4 md:mx-0  justify-between">
-    
-<div className="2xl:min-w-[920px] w-full">{details.tabComponent}</div>
-
-{/* new user tab  */}
-<div className="min-w-80 p-4 hidden md:block bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
- New user lists
-</div>
-</main>
+        {/* new user tab  */}
+        <div className="min-w-80 p-4 hidden md:block bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+          New user lists
+        </div>
+      </main>
     </div>
   );
 };

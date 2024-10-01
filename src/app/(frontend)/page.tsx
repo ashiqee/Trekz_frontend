@@ -1,12 +1,14 @@
 
-import { getAllPosts } from "@/services/PostService";
+
 import Timeline from "./profile/_components/Timeline";
 
+import { getAllPosts } from "@/services/PostService";
+
 export default async function Home() {
+ 
 
   const {data:posts}= await getAllPosts()
-  console.log("GetDatata",posts);
-  
+
 
   return (
     <section className="flex max-w-7xl mx-auto gap-4 py-8 md:py-10">

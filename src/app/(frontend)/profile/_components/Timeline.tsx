@@ -2,7 +2,8 @@
 import PostCard from "@/components/cards/PostCard";
 import CreateNewPostModal from "@/components/modal/CreatePostModal";
 
-const Timeline = ({datas}) => {
+
+const Timeline = ({datas}:{datas:any}) => {
    
 
     return (

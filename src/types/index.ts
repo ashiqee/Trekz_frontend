@@ -28,3 +28,22 @@ export interface IUser{
   updatedAt?: string;
   __v?: number;
 }
+
+export interface IComment {
+  user: string;
+  post: string;
+  commentText: string;
+ }
+
+export interface IPost  {
+  user: string;
+  postContent?: string;
+  video?: string;
+  images?: string[];
+  isPremium: boolean;
+  upVotes: string[]; 
+  downVotes: string[]; 
+  comments: IComment[];
+  
+}
+

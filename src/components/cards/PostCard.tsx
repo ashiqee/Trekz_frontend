@@ -18,14 +18,17 @@ const videos: string | any[]= [ ]
         <div className="flex gap-3 items-center">
           <Avatar src={post?.user?.profilePhoto} />
           <div className="flex justify-between  w-full">
-            <p className="flex  font-medium flex-col">
+            <div className="flex  font-medium flex-col">
+              <div className="flex items-center gap-4 ">
               {" "}
-              {post?.user?.name}
+              <p>{post?.user?.name}</p>
+             
+              </div>
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">
                 {" "}
                 <Globe size={11} /> published: {post?.createdAt?.slice(0,10)}
               </small>
-            </p>
+            </div>
 
             <PostActionDropDown />
           </div>

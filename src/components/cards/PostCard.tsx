@@ -1,30 +1,61 @@
-'use client'
+"use client";
 import React from "react";
-import { Avatar, Divider,  Input } from "@nextui-org/react";
+import { Avatar, Divider } from "@nextui-org/react";
 import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
+import { FieldValues, useForm } from "react-hook-form";
+
+import TRForm from "../forms/TRFrom";
+import TRInput from "../forms/TRInput";
+import CommentSkeleton from "../skeletons/CommentSkeleton";
 
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
 import VideoCard from "./cardsComp/VideoCard";
 import ImageCard from "./cardsComp/ImageCard";
-import { useDownvotePost, useUpvotePost } from "@/hooks/posts.hook";
 
-const PostCard = ({post}:{post:any}) => {
+import {
+  useCreateComment,
+  useDownvotePost,
+  useUpvotePost,
+} from "@/hooks/posts.hook";
+import { useUser } from "@/context/user.provider";
+import { useRouter } from "next/navigation";
+
+const PostCard = ({ post }: { post: any }) => {
+  const router = useRouter()
+  const { reset } = useForm();
   const { mutate: handleUpvoteToDb, isPending, isSuccess } = useUpvotePost();
+  const {
+    mutate: handleCommentToDb,
+    isPending: isComPending,
+    isSuccess: isComSuccess,
+  } = useCreateComment();
   const { mutate: handleDownvoteToDb } = useDownvotePost();
 
-  const handleUpvote =( )=>{
-    handleUpvoteToDb(post._id)
-    
+  const {user} = useUser()
 
-  }
-  const handleDownvote =( )=>{
+  const handleUpvote = () => {
+    handleUpvoteToDb(post._id);
+  };
+  const handleDownvote = () => {
+    handleDownvoteToDb(post._id);
+  };
 
-    handleDownvoteToDb(post._id)
-  
+  const handleCommentSubmit = (data: FieldValues) => {
 
+    if(!user?.email){
+      router.push('/login')
 
-  }
+    }
+    const commentText = data.commnetText;
 
+    const commentData = {
+      commentText: commentText,
+      postId: post._id,
+    };
+
+    handleCommentToDb(commentData);
+    reset();
+  };
 
   return (
     <div className="p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
@@ -35,13 +66,12 @@ const PostCard = ({post}:{post:any}) => {
           <div className="flex justify-between  w-full">
             <div className="flex  font-medium flex-col">
               <div className="flex items-center gap-4 ">
-              {" "}
-              <p>{post?.user?.name}</p>
-             
+                {" "}
+                <p>{post?.user?.name}</p>
               </div>
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">
                 {" "}
-                <Globe size={11} /> published: {post?.createdAt?.slice(0,10)}
+                <Globe size={11} /> published: {post?.createdAt?.slice(0, 10)}
               </small>
             </div>
 
@@ -56,67 +86,61 @@ const PostCard = ({post}:{post:any}) => {
           <div dangerouslySetInnerHTML={{ __html: post.postContent }} />
           {/* if image here show  */}
           <div>
-
-{post?.video?.length > 0 ? (
-<VideoCard video={post?.video} />
-
-)
-:  
-<>
-<ImageCard images={post?.images} />
-{/* <ImageGallery images={images} /> */}
-</>
-}
-           
-         
+            {post?.video?.length > 0 ? (
+              <VideoCard video={post?.video} />
+            ) : (
+              <>
+                <ImageCard images={post?.images} />
+                {/* <ImageGallery images={images} /> */}
+              </>
+            )}
           </div>
           <div className="flex justify-between items-center py-2">
             <div className="flex items-center gap-4">
-              <button onClick={handleUpvote} className="flex gap-1">
+              <button className="flex gap-1" onClick={handleUpvote}>
                 <ThumbsUp />
                 {post?.upVotes?.length}
               </button>
-              <button onClick={handleDownvote} className="flex gap-1">
+              <button className="flex gap-1" onClick={handleDownvote}>
                 <ThumbsDown />
                 {post?.downVotes?.length}
               </button>
             </div>
 
-            <p className="flex items-center">{post?.comments?.length} comments</p>
+            <p className="flex items-center">
+              {post?.comments?.length} comments
+            </p>
           </div>
           {/* comment collection  */}
           <Divider />
-          <div className="py-2 flex gap-1.5">
+
+          {post.comments?.map((cmt) => (
+            <div key={cmt._id} className="py-2 flex gap-1.5">
+              <Avatar size="sm" src={cmt.user.profilePhoto} />
+              <div>
+                <div className="bg-slate-400/45 w-fit px-2 rounded-xl">
+                  <p className="text-[11px]">{cmt.user.name} </p>
+                  <p className="text-[12px]">{cmt.commentText}</p>
+                </div>
+                <span className="text-[8px] ml-1 text-gray-400">
+                  {cmt.createdAt.slice(11, 16)}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          {/* comment input  */}
+          {isComPending && <CommentSkeleton />}
+          <div className="flex w-full  gap-1.5">
             <Avatar
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+              src={user?.profilePhoto}
             />
-            <div className="bg-slate-400/45 w-fit px-2 rounded-xl">
-              <p className="text-[11px]">{"Ashiqeee"}</p>
-              <p className="text-[12px]">
-                আপেল ফোন নাকি ভাইয়া.....😮😮😮😮, আজকাল চোখে ম্যালা কম দেহি..
-              </p>
+            <div className="w-full">
+              <TRForm onSubmit={handleCommentSubmit}>
+                <TRInput name="commnetText" type="text" />
+              </TRForm>
             </div>
-          </div>
-          <div className="py-2 flex gap-1.5">
-            <Avatar
-              size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            />
-            <div className="bg-slate-400/45 w-fit px-2 rounded-xl">
-              <p className="text-[11px]">{"Ashiqeee"}</p>
-              <p className="text-[12px]">
-                আপেল ফোন নাকি ভাইয়া.....😮😮😮😮
-              </p>
-            </div>
-          </div>
-{/* comment input  */}
-          <div className="flex gap-1.5">
-          <Avatar
-              size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            />
-            <Input placeholder="Comment as Ashiq" type="text"/>
           </div>
         </section>
       </div>

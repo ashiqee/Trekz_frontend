@@ -2,13 +2,13 @@
 
 import { FieldValues } from "react-hook-form";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 import { getCurrentUser } from "../AuthService";
 
 import axiosInstance from "@/lib/AxiosInstance";
 import envConfig from "@/config/envConfig";
 import nexiosInstance from "@/config/naxios.config";
-import { redirect } from "next/navigation";
 
 
 export const createAPost = async (formData: FieldValues) => {
@@ -115,6 +115,54 @@ export const downVotetodB = async (postId: any) => {
     revalidateTag('posts')
 
     return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+
+// comment section 
+
+
+
+export const createAComment = async (commentData: FieldValues) => {
+  try {
+    const user = await getCurrentUser();
+ 
+  if(!user){
+     return {message:"Please login!"}
+  }
+  const formData = {
+    ...commentData,
+    userId: user?._id
+
+  }
+  const { data } = await nexiosInstance.post("/comments", formData,{
+    cache:"no-store"
+    
+  });
+ 
+    revalidateTag("posts");
+
+  return data
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const deleteAComment = async (commentId: FieldValues) => {
+  try {
+    const user = await getCurrentUser();
+ 
+  if(!user){
+     return {message:"Please login!"}
+  }
+ 
+  const { data } = await nexiosInstance.delete(`/comments/delete/${commentId}`,);
+ 
+    revalidateTag("posts");
+
+  return data
   } catch (error: any) {
     throw new Error(error);
   }

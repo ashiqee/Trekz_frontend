@@ -10,7 +10,7 @@ export interface IInput {
   size?:"sm"| "md" | "lg";
   isRequired?:boolean;
   type?:string;
-  label:string;
+  label?:string;
   name:string;
   disable?:boolean;
 }

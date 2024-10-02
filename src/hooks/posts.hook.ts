@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-import { createAPost, downVotetodB, upVotetodB } from "@/services/PostService";
+import { createAComment, createAPost, downVotetodB, upVotetodB } from "@/services/PostService";
 
 
 export const useCreatePosts =()=>{
@@ -37,6 +37,24 @@ export const useDownvotePost =()=>{
     return useMutation<any,Error,FieldValues>({
         mutationKey: ['post'],
         mutationFn: async (postId)=> await downVotetodB(postId),
+        onSuccess:(res)=>{
+                     
+            toast.success(res.message);
+        },
+        onError:(error)=>{
+            toast.error(error.message)
+        }
+    })
+};
+
+
+// comment hook 
+
+
+export const useCreateComment =()=>{
+    return useMutation<any,Error,FieldValues>({
+        mutationKey: ['post'],
+        mutationFn: async (commentData)=> await createAComment(commentData),
         onSuccess:(res)=>{
                      
             toast.success(res.message);

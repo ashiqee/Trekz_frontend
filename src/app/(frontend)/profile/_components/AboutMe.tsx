@@ -3,7 +3,7 @@ import React from 'react';
 
 import { useUser } from '@/context/user.provider';
 
-const AboutMe = () => {
+const AboutMe = ({about}:{about:any}) => {
     const {user}=useUser()
 
     return (
@@ -16,12 +16,12 @@ const AboutMe = () => {
             </div>
 
             <div className='space-y-3'>
-                 <Image src='s' />
-                <p>Name: {user?.name}</p>
-                <p>Email: {user?.email}</p>
-                <p>Mobile: {user?.mobileNumber}</p>
-                <p>Role: {user?.role}</p>
-                <p>Verification Status: {user?.isVerified ? "Verified":"Not Verify"}</p>
+                 
+                <p>Name: {about?.name}</p>
+                <p>Email: {about?.email}</p>
+                <p>Mobile: {about?.mobileNumber}</p>
+                <p>Role: {about?.role}</p>
+                <p>Verification Status: {about?.isVerified ? "Verified":"Not Verify"}</p>
             </div>
           </section>
         </div>

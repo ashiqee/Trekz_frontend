@@ -31,14 +31,22 @@ export const createAPost = async (formData: FieldValues) => {
   }
 };
 
-export const getAllPosts = async () => {
+export const getAllPosts = async (query:Record<string,any>) => {
   let fetchOptions = {};
 
   fetchOptions = {
     cache: "no-store",
   };
+  const queryString = new URLSearchParams(query).toString()
 
-  const res = await fetch(`${envConfig.baseApi}/posts`, fetchOptions);
+ 
+  
+  const res = await fetch(`${envConfig.baseApi}/posts?${queryString}`, fetchOptions);
+
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch posts');
+  }
 
   return res.json();
 };

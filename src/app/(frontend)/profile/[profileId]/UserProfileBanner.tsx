@@ -1,23 +1,24 @@
 'use client'
 import { Button, Image, Tooltip } from '@nextui-org/react';
-import { Facebook, Share2, Star } from 'lucide-react';
+import { Facebook, Share2, Star, UserPlus } from 'lucide-react';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 import { useUser } from '@/context/user.provider';
-import ProfileSkeleton from '@/components/skeletons/ProfileSkeleton';
 
+const UserProfileBanner = ({userDetails}:{userDetails:any}) => {
+const {user} = useUser()
 
-const ProfileBanner = () => {
-    const {user,isLoading}=useUser()
-   
+if(!user){
+    redirect('/login')
+}
+    const isFollowing = userDetails?.followers.includes(user?._id!)
+
     
-
+    
     return (
-        <>
-        {isLoading || !user?.email && <ProfileSkeleton/>}
-
-      { !isLoading && 
-        <div className="
+        <div>
+             <div className="
         relative
         bg-[url('/images/railay-beach.webp')] bg-cover bg-center
         h-72 shadow-2xl shadow-gradient-to-b dark:from-slate-900/45 dark:to-slate-900 justify-center flex flex-col
@@ -30,11 +31,11 @@ const ProfileBanner = () => {
               <div className="flex items-center gap-6">
                 <Image
                   className="md:w-40 md:h-40 w-24 shadow hover:shadow-lg shadow-primary-300 rounded-full"
-                  src={user?.profilePhoto}
+                  src={userDetails?.profilePhoto}
                 />
                 <div>
-                  <h3 className="text-xl md:text-3xl">{user?.name}</h3>
-                  <p className="text-sm font-extralight">@{user?.email?.split('@')[0]}</p>
+                  <h3 className="text-xl md:text-3xl">{userDetails?.name}</h3>
+                  <p className="text-sm font-extralight">@{userDetails?.email?.split('@')[0]}</p>
                 </div>
               </div>
      
@@ -65,17 +66,20 @@ const ProfileBanner = () => {
                     </button>
                   </Tooltip>
                 </div>
-     
-                <Button size="sm">Invite Others</Button>
+     {
+        !isFollowing ? <Button size="sm"><UserPlus/> Follow</Button>
+        : <Button size="sm"><UserPlus/> unfollow</Button>
+     }
+                
               </div>
             </section>
           </div>
      
            
      
-        </div>}
-        </>  
+        </div>
+        </div>
     );
 };
 
-export default ProfileBanner;
+export default UserProfileBanner;

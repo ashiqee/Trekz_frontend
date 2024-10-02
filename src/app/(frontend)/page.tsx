@@ -1,13 +1,18 @@
 
 
+
 import Timeline from "./profile/_components/Timeline";
 
 import { getAllPosts } from "@/services/PostService";
 
 export default async function Home() {
- 
+  let query = {
+    sortBy:"upVotes",
+    limit:10
+  }
 
-  const {data:posts}= await getAllPosts()
+  const {data:posts}= await getAllPosts(query)
+
 
 
   return (
@@ -17,7 +22,7 @@ export default async function Home() {
     </div>
       <div className="inline-block max-w-2xl mx-auto  justify-center">
        
-<Timeline datas={posts}/>
+<Timeline  datas={posts}/>
       
       </div>
 

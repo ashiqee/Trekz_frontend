@@ -3,6 +3,8 @@ import React from "react";
 import { Avatar, Divider } from "@nextui-org/react";
 import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
 import { FieldValues, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import TRForm from "../forms/TRFrom";
 import TRInput from "../forms/TRInput";
@@ -11,6 +13,7 @@ import CommentSkeleton from "../skeletons/CommentSkeleton";
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
 import VideoCard from "./cardsComp/VideoCard";
 import ImageCard from "./cardsComp/ImageCard";
+import CmntActionDropDown from "./cardsComp/CommentActDrop";
 
 import {
   useCreateComment,
@@ -18,10 +21,10 @@ import {
   useUpvotePost,
 } from "@/hooks/posts.hook";
 import { useUser } from "@/context/user.provider";
-import { useRouter } from "next/navigation";
+
 
 const PostCard = ({ post }: { post: any }) => {
-  const router = useRouter()
+  const router = useRouter();
   const { reset } = useForm();
   const { mutate: handleUpvoteToDb, isPending, isSuccess } = useUpvotePost();
   const {
@@ -31,7 +34,7 @@ const PostCard = ({ post }: { post: any }) => {
   } = useCreateComment();
   const { mutate: handleDownvoteToDb } = useDownvotePost();
 
-  const {user} = useUser()
+  const { user } = useUser();
 
   const handleUpvote = () => {
     handleUpvoteToDb(post._id);
@@ -41,10 +44,8 @@ const PostCard = ({ post }: { post: any }) => {
   };
 
   const handleCommentSubmit = (data: FieldValues) => {
-
-    if(!user?.email){
-      router.push('/login')
-
+    if (!user?.email) {
+      router.push("/login");
     }
     const commentText = data.commnetText;
 
@@ -62,12 +63,17 @@ const PostCard = ({ post }: { post: any }) => {
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">
-          <Avatar src={post?.user?.profilePhoto} />
+          <Link href={`/profile/${post?.user?._id}`}>
+            <Avatar src={post?.user?.profilePhoto} />
+          </Link>
           <div className="flex justify-between  w-full">
             <div className="flex  font-medium flex-col">
               <div className="flex items-center gap-4 ">
                 {" "}
-                <p>{post?.user?.name}</p>
+                <Link href={`/profile/${post?.user?._id}`}>
+                  {" "}
+                  <p>{post?.user?.name}</p>
+                </Link>
               </div>
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">
                 {" "}
@@ -115,16 +121,21 @@ const PostCard = ({ post }: { post: any }) => {
           <Divider />
 
           {post.comments?.map((cmt) => (
-            <div key={cmt._id} className="py-2 flex gap-1.5">
+            <div key={cmt._id} className="py-2 flex  gap-1.5">
               <Avatar size="sm" src={cmt.user.profilePhoto} />
-              <div>
-                <div className="bg-slate-400/45 w-fit px-2 rounded-xl">
-                  <p className="text-[11px]">{cmt.user.name} </p>
-                  <p className="text-[12px]">{cmt.commentText}</p>
+              <div className="flex items-center gap-2">
+                <div>
+                  <div className="bg-slate-400/45 w-fit px-2 rounded-xl">
+                    <p className="text-[11px] font-normal">{cmt.user.name} </p>
+                    <p className="text-[12px] font-medium">{cmt.commentText}</p>
+                  </div>
+                  <span className="text-[8px] ml-1 text-gray-400">
+                    {cmt.createdAt.slice(11, 16)}
+                  </span>
                 </div>
-                <span className="text-[8px] ml-1 text-gray-400">
-                  {cmt.createdAt.slice(11, 16)}
-                </span>
+                {/* commnet action  */}
+
+                <CmntActionDropDown cmntId={cmt._id} />
               </div>
             </div>
           ))}
@@ -132,10 +143,7 @@ const PostCard = ({ post }: { post: any }) => {
           {/* comment input  */}
           {isComPending && <CommentSkeleton />}
           <div className="flex w-full  gap-1.5">
-            <Avatar
-              size="sm"
-              src={user?.profilePhoto}
-            />
+            <Avatar size="sm" src={user?.profilePhoto} />
             <div className="w-full">
               <TRForm onSubmit={handleCommentSubmit}>
                 <TRInput name="commnetText" type="text" />

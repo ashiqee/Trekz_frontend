@@ -35,7 +35,7 @@ const ProfileMenuTab = ({ userData ,postsData }: any) => {
       tabTitle: "About",
       tabComponent: (
         <>
-         <AboutMe/>
+         <AboutMe  about={userData}/>
         </>
       ),
     },
@@ -64,8 +64,15 @@ const ProfileMenuTab = ({ userData ,postsData }: any) => {
         <div className="2xl:min-w-[920px] w-full">{details.tabComponent}</div>
 
         {/* new user tab  */}
-        <div className="min-w-80 p-4 hidden md:block bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
-          New user lists
+        <div className="min-w-80 h-fit p-4 hidden md:block bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+        <div className='space-y-3 text-sm'>
+                 <h3 className="text-xl font-md">Intro</h3>
+                 <p>Name: {userData?.name}</p>
+                 <p>Email: {userData?.email}</p>
+                 <p>Mobile: {userData?.mobileNumber}</p>
+                 <p>Role: {userData?.role}</p>
+                 <p>Verification Status: {userData?.isVerified ? "Verified":"Not Verify"}</p>
+             </div>
         </div>
       </main>
     </div>

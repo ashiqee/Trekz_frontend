@@ -63,14 +63,14 @@ const PostCard = ({ post }: { post: any }) => {
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">
-          <Link href={`/profile/${post?.user?._id}`}>
+          <Link href={user ? `/profile/${post?.user?._id}`:'/login'}>
             <Avatar src={post?.user?.profilePhoto} />
           </Link>
           <div className="flex justify-between  w-full">
             <div className="flex  font-medium flex-col">
               <div className="flex items-center gap-4 ">
                 {" "}
-                <Link href={`/profile/${post?.user?._id}`}>
+                <Link href={user ? `/profile/${post?.user?._id}`:'/login'}>
                   {" "}
                   <p>{post?.user?.name}</p>
                 </Link>

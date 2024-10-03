@@ -1,21 +1,20 @@
 "use client";
 import { Button } from "@nextui-org/button";
-import { Star, UserMinusIcon, UserPlus } from "lucide-react";
+import { Star, UserMinusIcon } from "lucide-react";
 import React from "react";
-
-import { addFollowing, removeFollowing } from "@/services/FollowService";
-import { toast } from "sonner";
-import { useAddFollow, useUnFollow } from "@/hooks/follow.hoot";
 import { Spinner } from "@nextui-org/react";
+
+import { useAddFollow, useUnFollow } from "@/hooks/follow.hoot";
+
 
 const FollowAction = ({
   userDetails,
   userId,
-  isFollow,
+ 
 }: {
   userDetails: any;
   userId?: string;
-  isFollow?: boolean;
+  
 }) => {
   const isFollowing = userDetails?.followers?.some(
     (follower: any) => follower._id === userId
@@ -34,7 +33,7 @@ const FollowAction = ({
   return (
     <div>
       {!isFollowing ? (
-        <Button size="sm" color="primary" onPress={handleAddFollow}>
+        <Button color="primary" size="sm" onPress={handleAddFollow}>
           {isAddLoading ? (
             <><Spinner className="size-2" />Following...</>
           ) : (
@@ -44,7 +43,7 @@ const FollowAction = ({
           )}
         </Button>
       ) : (
-        <Button size="sm" color="secondary" onPress={handleUnFollow}>
+        <Button color="secondary" size="sm" onPress={handleUnFollow}>
           {isUnfollowpending ? (
           <><Spinner className="size-2"  />Unfollowing...</>
           ) : (

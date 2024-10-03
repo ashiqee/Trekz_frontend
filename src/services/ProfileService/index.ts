@@ -8,6 +8,7 @@ import { revalidateTag } from "next/cache";
 import { FieldValues } from "react-hook-form";
 import axios from "axios";
 import envConfig from "@/config/envConfig";
+import { toast } from "sonner";
 
 export const getMyUserData = async () => {
   const user = await getCurrentUser();
@@ -51,7 +52,9 @@ export const updateProfile = async (formData:any) => {
       },
     });
 
-    revalidateTag("user")
+    if(data){
+      revalidateTag("user")
+    }
 
     return data;
   } catch (error: any) {

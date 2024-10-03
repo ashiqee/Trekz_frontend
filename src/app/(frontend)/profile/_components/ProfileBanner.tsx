@@ -1,15 +1,16 @@
 'use client'
 import { Button, Image, Tooltip } from '@nextui-org/react';
-import { Edit, Facebook, Share2, Star } from 'lucide-react';
+import { Facebook, Share2, Star } from 'lucide-react';
 import React from 'react';
 
-import { useUser } from '@/context/user.provider';
-import ProfileSkeleton from '@/components/skeletons/ProfileSkeleton';
 import ProfileEditModal from './_modal/ProfileEditModal';
 import ChangeProfileImage from './_modal/ChangeProfileImage';
 
+import { useUser } from '@/context/user.provider';
+import ProfileSkeleton from '@/components/skeletons/ProfileSkeleton';
 
-const ProfileBanner = ({myProfileData}) => {
+
+const ProfileBanner = ({myProfileData}:{myProfileData:any}) => {
     const {user,isLoading}=useUser()
    
     
@@ -31,7 +32,7 @@ const ProfileBanner = ({myProfileData}) => {
             <section className="max-w-7xl flex justify-between items-center w-full px-4 md:mx-auto">
               <div className="flex relative items-center gap-6">
                 <Image
-                  className="md:w-40 md:h-40 w-24 shadow hover:shadow-lg shadow-primary-300 rounded-full"
+                  className="md:w-40 md:h-40 w-24 object-cover shadow hover:shadow-lg shadow-primary-300 rounded-full"
                   src={myProfileData?.profilePhoto}
                 />
                 <ChangeProfileImage/>

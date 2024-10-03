@@ -17,11 +17,13 @@ import React, { ChangeEvent, useState } from "react";
 import TRForm from "@/components/forms/TRFrom";
 import TRInput from "@/components/forms/TRInput";
 import { useUser } from "@/context/user.provider";
+import { updateProfile } from "@/services/ProfileService";
+import { toast } from "sonner";
 
 const ChangeProfileImage = () => {
   const { user } = useUser();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [image, setImage] = useState<File[] | []>([]);
+  const [images, setImage] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string>();
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,8 +41,28 @@ const ChangeProfileImage = () => {
     }
   };
 
-  const handleChangeImg = () => {
-    console.log(image);
+  const handleChangeImg = async () => {
+    const formData = new FormData();
+    
+    const updateData={}
+
+    formData.append('data', JSON.stringify(updateData));
+
+  
+
+    for (let image of images) {
+      formData.append("profilePhoto", image);
+    }
+
+    const data = await updateProfile(formData)
+
+    if(data){
+        toast.success("Update your profilePhoto successfully")
+    }else{
+      toast.error("something wrong!")
+    }
+    
+    onOpenChange()
   };
 
   return (

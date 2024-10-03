@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/react";
 import { Edit } from "lucide-react";
 import React from "react";
+import { toast } from "sonner";
 
 import TRForm from "@/components/forms/TRFrom";
 import { updateProfile } from "@/services/ProfileService";
@@ -34,7 +35,14 @@ const ProfileEditModal =  ({myProfileData}:{myProfileData:any}) => {
     // }
 
    
-    updateProfile(formData)
+    const data = await updateProfile(formData)
+
+    if(data){
+        toast.success("Update your profile successfully")
+    }else{
+      toast.error("something wrong!")
+    }
+    
     onOpenChange()
   };
 

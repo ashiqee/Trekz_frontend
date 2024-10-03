@@ -20,9 +20,10 @@ import TRRichTextEditor from "../forms/TRRichTextEditor";
 
 import { useUser } from "@/context/user.provider";
 import { useCreatePosts } from "@/hooks/posts.hook";
+import { useRouter } from "next/navigation";
 
 const CreateNewPostModal = () => {
-
+const router = useRouter()
   const { user } = useUser();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [editorContent, setEditorContent] = useState("");
@@ -78,7 +79,13 @@ const CreateNewPostModal = () => {
    handleCreatePost(formData)
   };
 
-  
+  const handleModal =()=>{
+    if(user){
+      onOpenChange()
+    }else{
+      router.push('/login')
+    }
+  }
 
   return (
     <>
@@ -86,10 +93,11 @@ const CreateNewPostModal = () => {
         className="w-full p-5 space-y-4 cursor-pointer"
         role="button"
         tabIndex={0}
-        onClick={onOpen}
+        
+        onClick={handleModal}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
-            onOpen();
+            handleModal();
           }
         }}
       >

@@ -28,8 +28,6 @@ const LoginContent = () => {
     userLoading(true);
   };
 
-  console.log(isSuccess);
-  
   useEffect(() => {
     if (!isPending) {
         if (isSuccess) {
@@ -43,7 +41,7 @@ const LoginContent = () => {
           toast.error(error?.message || "Login failed");
         }
   
-        // Stop loading after login success or failure
+       
         userLoading(false);
     }
   }, [isPending, isSuccess, redirect, user, userLoading]);

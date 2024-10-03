@@ -4,7 +4,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  
   Button,
   useDisclosure,
 } from "@nextui-org/react";
@@ -12,19 +12,30 @@ import { Edit } from "lucide-react";
 import React from "react";
 
 import TRForm from "@/components/forms/TRFrom";
-import TRInput from "@/components/forms/TRInput";
-import { useUser } from "@/context/user.provider";
 import { updateProfile } from "@/services/ProfileService";
+import TRInput from "@/components/forms/TRInput";
 
-const ProfileEditModal =  ({myProfileData}) => {
- const {user}=useUser()
+const ProfileEditModal =  ({myProfileData}:{myProfileData:any}) => {
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
 
 
 
-  const handleProfileEdit = (data) => {
-    updateProfile(data);
+  const handleProfileEdit = async (updateData:any) => {
+    const formData = new FormData();
+
+   
+
+    formData.append('data', JSON.stringify(updateData));
+
+    // for (let image of images) {
+    //   formData.append("profilePhoto", image);
+    // }
+
+   
+    updateProfile(formData)
+    onOpenChange()
   };
 
   return (
@@ -40,7 +51,7 @@ const ProfileEditModal =  ({myProfileData}) => {
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
                 Edit Profile

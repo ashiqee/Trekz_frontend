@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 
 import { useUser } from '@/context/user.provider';
+import FollowAction from '../_components/FollowAction';
+
 
 const UserProfileBanner = ({userDetails}:{userDetails:any}) => {
 const {user} = useUser()
@@ -12,9 +14,7 @@ const {user} = useUser()
 if(!user){
     redirect('/login')
 }
-    const isFollowing = userDetails?.followers.includes(user?._id!)
-
-    
+   
     
     return (
         <div>
@@ -66,11 +66,8 @@ if(!user){
                     </button>
                   </Tooltip>
                 </div>
-     {
-        !isFollowing ? <Button size="sm"><UserPlus/> Follow</Button>
-        : <Button size="sm"><UserPlus/> unfollow</Button>
-     }
-                
+    
+                <FollowAction userDetails={userDetails} userId={user._id}/>
               </div>
             </section>
           </div>

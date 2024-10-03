@@ -57,7 +57,7 @@ export const config ={
     matcher :[
         '/login',
         '/register',
-        "/profile",
+        "/profile/:page",
         '/admin/:page',
         '/user/:page',
         

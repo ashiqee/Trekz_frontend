@@ -10,21 +10,35 @@ interface Ifollow{
 }
 
 interface IfollowProps{
-    followData:Ifollow[]
+    followData:Ifollow[];
+    currentUserFollower:Ifollow[]
 }
 
-const Follow = ({followData}:IfollowProps) => {
+const Follow = ({followData,currentUserFollower}:IfollowProps) => {
+
 
 
     
     return (
-        <div className='flex flex-wrap gap-4'>
-  {
-    followData?.map((data)=>(
-     <FollowCard key={data._id} data={data}/>
-    ))
-  }
+        <>
+        <p className="mb-10">Total Followers: {followData.length}</p>
+        <div className="flex flex-wrap gap-4">
+          {followData?.map((data) => {
+            // Check if the current user follows  user
+            const isFollower = currentUserFollower?.some(
+              (follower) => follower._id === data._id
+            );
+  
+            return (
+              <FollowCard 
+                key={data._id}
+                data={data} 
+                isFollower={isFollower} 
+              />
+            );
+          })}
         </div>
+      </>
     );
 };
 

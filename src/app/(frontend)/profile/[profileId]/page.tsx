@@ -1,19 +1,24 @@
 import React from 'react';
 
-import ProfileBanner from '../_components/ProfileBanner';
 import ProfileMenuTab from '../ProfileMenuTab';
+
 import UserProfileBanner from './UserProfileBanner';
-import { getOtherUserData } from '@/services/ProfileService';
+
+import { getMyUserData, getOtherUserData } from '@/services/ProfileService';
 
 
-const UserProfilePage = async ({params}) => {
+const UserProfilePage = async ({params}:{params:any}) => {
     
     const userId = params.profileId
     const {data:userData}= await getOtherUserData(userId)
-
-    const {getUser,userPosts}=userData;
-  
+        const {getUser,userPosts}= userData;
+         const {data: currentUserData}= await getMyUserData()
+ 
     
+    const currentUserFollowsData = {
+        followers: currentUserData?.followers,
+        follow: currentUserData?.follow,
+    }
     
     return (
         <><div>
@@ -22,7 +27,10 @@ const UserProfilePage = async ({params}) => {
 {/* dropdown menu  */}
 <div className="max-w-7xl min-w-7xl -top-9 relative mx-auto">
   <div className=" ">
-    <ProfileMenuTab postsData = {userPosts} userData={getUser} />
+    <ProfileMenuTab 
+    currentUserIsFollow={currentUserFollowsData ? currentUserFollowsData: []} 
+    postsData = {userPosts ? userPosts : []} 
+    userData={getUser} />
   </div>
 </div>
 </div>

@@ -21,7 +21,15 @@ import {
   Logo,
 } from "@/components/icons";
 
-export const Navbar = () => {
+import { Button } from "@nextui-org/button";
+import { getCurrentUser } from "@/services/AuthService";
+
+export const Navbar = async () => {
+
+  const user= await getCurrentUser()
+
+
+  
   const searchInput = (
     <Input
       aria-label="Search"
@@ -61,7 +69,10 @@ export const Navbar = () => {
 
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
-          <NavbarDropdown/>
+          {user?.email ? <><NavbarDropdown/></>:
+          <><Link href="/login"><Button size="sm" variant="faded">Login</Button></Link></>
+          }
+          
         </NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />

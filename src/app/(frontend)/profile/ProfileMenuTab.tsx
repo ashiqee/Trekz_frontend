@@ -6,13 +6,16 @@ import Follow from "./_components/Follow";
 import Followers from "./_components/Follower";
 import AboutMe from "./_components/AboutMe";
 
-const ProfileMenuTab = ({ userData ,postsData }: any) => {
+const ProfileMenuTab = ({ userData ,postsData,currentUserIsFollow }: any) => {
   const [isActiveTab, setActiveTab] = useState(0);
 
+  console.log(currentUserIsFollow);
+  
 
   const tabDatas = [
     {
       tabTitle: "Timeline",
+
       tabComponent: (
         <>
           <Timeline datas={postsData} />
@@ -21,13 +24,18 @@ const ProfileMenuTab = ({ userData ,postsData }: any) => {
     },
     {
       tabTitle: "Followers",
-      tabComponent: <><Followers followData={userData?.followers} /></>,
+      count:userData?.followers?.length,
+      tabComponent: <><Followers currentUserFollower={currentUserIsFollow?.follow}
+       followData={userData?.followers} /></>,
     },
     {
       tabTitle: "Follow",
+      count:userData?.follow?.length,
       tabComponent: (
         <>
-          <Follow followData={userData?.follow} />
+          <Follow 
+          currentUserFollower={currentUserIsFollow?.follow}
+          followData={userData?.follow} />
         </>
       ),
     },
@@ -56,6 +64,7 @@ const ProfileMenuTab = ({ userData ,postsData }: any) => {
                md:font-bold text-center  p-1.5 px-4 md:px-10 `}
           >
             <button onClick={() => setActiveTab(i)}>{data.tabTitle}</button>
+           {data.count>0 && <span className="bg-slate-700/75 p-0.5 rounded-full px-1.5 relative bottom-2 text-[10px]">{ data.count}</span> } 
           </li>
         ))}
       </ul>

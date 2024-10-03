@@ -43,8 +43,8 @@ export default function NavbarDropdown() {
         <DropdownItem onClick={() => handleNavigation("/profile")}>
           Profile
         </DropdownItem>
-        <DropdownItem onClick={() => handleNavigation(`/${user?.role?.toLowerCase()}`)}>
-          Dashboard
+        <DropdownItem onClick={() => handleNavigation(`/profile/password-security`)}>
+          password and security
         </DropdownItem>
         <DropdownItem
           key="delete"

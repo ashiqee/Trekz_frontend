@@ -7,8 +7,7 @@ import { getAllPosts } from "@/services/PostService";
 
 export default async function Home() {
   let query = {
-    sortBy:"upVotes",
-    limit:10
+       limit:10
   }
 
   const {data:posts}= await getAllPosts(query)

@@ -10,6 +10,7 @@ import {
 import { Link } from "@nextui-org/link";
 import { Input } from "@nextui-org/input";
 import NextLink from "next/link";
+import { Button } from "@nextui-org/button";
 
 import Menubar from "./menubar";
 import NavbarDropdown from "./NavbarDropDown";
@@ -20,12 +21,11 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
-
-import { Button } from "@nextui-org/button";
 import { getCurrentUser } from "@/services/AuthService";
 
 export const Navbar = async () => {
 
+ 
   const user= await getCurrentUser()
 
 

@@ -3,7 +3,7 @@ import { getCurrentUser } from "./services/AuthService";
 
 
 
-const authRoutes = ["/login",'/register'];
+const authRoutes = ["/login",'/register',"/reset-password"];
 
 type Role = keyof typeof roleBasedRoutes;
 

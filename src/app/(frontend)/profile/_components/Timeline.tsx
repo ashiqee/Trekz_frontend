@@ -8,8 +8,8 @@ const Timeline = ({datas}:{datas:any}) => {
    
 
     return (
-        <div className="space-y-4    ">
-            <div className="  p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+        <div className="space-y-4   ">
+            <div className=" p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
             <CreateNewPostModal  />
 
             </div>

@@ -48,7 +48,7 @@ export const Navbar = async () => {
   );
 
   return (
-    <NextUINavbar className="dark:bg-gradient-to-b from-slate-900/15 to-slate-900/70" maxWidth="full" position="sticky">
+    <NextUINavbar className=" dark:bg-gradient-to-b from-slate-900/15 to-slate-900/70" maxWidth="full" position="sticky">
       <NavbarContent className="basis-1/5  sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">

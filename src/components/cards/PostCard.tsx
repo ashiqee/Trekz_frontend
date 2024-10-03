@@ -59,7 +59,7 @@ const PostCard = ({ post }: { post: any }) => {
   };
 
   return (
-    <div className="p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+    <div className="md:p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">

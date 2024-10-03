@@ -15,12 +15,12 @@ import {
 import { Camera, Images, Smile } from "lucide-react";
 import draftToHtml from "draftjs-to-html";
 import { convertToRaw } from "draft-js";
+import { useRouter } from "next/navigation";
 
 import TRRichTextEditor from "../forms/TRRichTextEditor";
 
 import { useUser } from "@/context/user.provider";
 import { useCreatePosts } from "@/hooks/posts.hook";
-import { useRouter } from "next/navigation";
 
 const CreateNewPostModal = () => {
 const router = useRouter()
@@ -130,10 +130,7 @@ const router = useRouter()
               </ModalHeader>
               <ModalBody>
                 <div className="bg-slate-300/5 p-4 min-h-40 rounded-md">
-                  {/* <TRRichTextEditor 
-                  editorState={editorState}
-                  handleEditorChange={handleEditorChange}
-                  setEditorState={setEditorState} /> */}
+                  
 
                   <TRRichTextEditor onChange={handleEditorChange} />
 

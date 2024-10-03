@@ -1,10 +1,12 @@
 'use client'
 import { Button, Image, Tooltip } from '@nextui-org/react';
-import { Facebook, Share2, Star } from 'lucide-react';
+import { Edit, Facebook, Share2, Star } from 'lucide-react';
 import React from 'react';
 
 import { useUser } from '@/context/user.provider';
 import ProfileSkeleton from '@/components/skeletons/ProfileSkeleton';
+import ProfileEditModal from './_modal/ProfileEditModal';
+import ChangeProfileImage from './_modal/ChangeProfileImage';
 
 
 const ProfileBanner = () => {
@@ -27,11 +29,12 @@ const ProfileBanner = () => {
           absolute inset-0
            dark:bg-gradient-to-r from-slate-900/15 to-slate-900/70 justify-center flex flex-col ">
             <section className="max-w-7xl flex justify-between items-center w-full px-4 md:mx-auto">
-              <div className="flex items-center gap-6">
+              <div className="flex relative items-center gap-6">
                 <Image
                   className="md:w-40 md:h-40 w-24 shadow hover:shadow-lg shadow-primary-300 rounded-full"
                   src={user?.profilePhoto}
                 />
+                <ChangeProfileImage/>
                 <div>
                   <h3 className="text-xl md:text-3xl">{user?.name}</h3>
                   <p className="text-sm font-extralight">@{user?.email?.split('@')[0]}</p>
@@ -69,8 +72,9 @@ const ProfileBanner = () => {
                 <Button size="sm">Invite Others</Button>
               </div>
             </section>
+          <ProfileEditModal/>
           </div>
-     
+
            
      
         </div>}

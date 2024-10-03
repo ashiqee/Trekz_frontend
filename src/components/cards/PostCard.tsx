@@ -120,7 +120,7 @@ const PostCard = ({ post }: { post: any }) => {
           {/* comment collection  */}
           <Divider />
 
-          {post.comments?.map((cmt) => (
+          {post.comments?.map((cmt:any) => (
             <div key={cmt._id} className="py-2 flex  gap-1.5">
               <Avatar size="sm" src={cmt.user.profilePhoto} />
               <div className="flex items-center gap-2">

@@ -3,6 +3,7 @@ import ProfileMenuTab from "./ProfileMenuTab";
 
 import { getMyUserData } from "@/services/ProfileService";
 import { getMyPosts } from "@/services/PostService";
+import { Button } from "@nextui-org/button";
 
 
 
@@ -20,8 +21,13 @@ const MyProfile = async () => {
   return (
     <>
       <div>
-        <ProfileBanner />
-
+      
+       <ProfileBanner />
+     
+       
+       
+       
+       
         {/* dropdown menu  */}
         <div className="max-w-7xl min-w-7xl -top-9 relative mx-auto">
           <div className=" ">
@@ -31,6 +37,7 @@ const MyProfile = async () => {
             userData={userData? userData:[]} />
           </div>
         </div>
+        
       </div>
     </>
   );

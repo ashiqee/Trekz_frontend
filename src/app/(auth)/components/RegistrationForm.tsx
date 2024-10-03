@@ -12,9 +12,13 @@ import Loading from "@/components/shared/Loading";
 import { useUser } from "@/context/user.provider";
 
 const RegistrationForm = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { setIsLoading: userLoading } = useUser();
-  const {mutate: handleRegister, isPending,isSuccess }= useUserRegistration()
+  const {
+    mutate: handleRegister,
+    isPending,
+    isSuccess,
+  } = useUserRegistration();
 
   const onSubmit = async (data: any) => {
     const userData = {
@@ -23,58 +27,62 @@ const RegistrationForm = () => {
     };
 
     handleRegister(userData);
-    userLoading(true)
-
-
+    userLoading(true);
   };
 
-  if(isSuccess){
-    userLoading(false)
-      router.push('/profile')
+  if (isSuccess) {
+    userLoading(false);
+    router.push("/profile");
   }
 
-  return (<>
-    {isPending && <Loading />}
-    <TRForm
-      //! Only for development
-      defaultValues={{
-        name: "Ashiqee",
-        email: "ashiqee@gmail.com",
-        mobileNumber: "01614654397",
-        password: "123456",
-      }}
-      resolver={zodResolver(registrationValidation)}
-      onSubmit={onSubmit}
-    >
-      <div className="py-3">
-        {" "}
-        <TRInput isRequired label="Full Name" name="name" type="text" />
-      </div>
-      <div className="py-3">
-        {" "}
-        <TRInput isRequired label="Mobile" name="mobileNumber" />
-      </div>
-      <div className="py-3">
-        {" "}
-        <TRInput isRequired label="Email" name="email" type="email" />
-      </div>
-      <div className="py-3">
-        {" "}
-        <TRInput isRequired label="Password" name="password" type="password" />
-      </div>
+  return (
+    <>
+      {isPending && <Loading />}
+      <TRForm
+        //! Only for development
+        defaultValues={{
+          name: "Ashiqee",
+          email: "ashiqee@gmail.com",
+          mobileNumber: "01614654397",
+          password: "123456",
+        }}
+        resolver={zodResolver(registrationValidation)}
+        onSubmit={onSubmit}
+      >
+        <div className="py-3">
+          {" "}
+          <TRInput isRequired label="Full Name" name="name" type="text" />
+        </div>
+        <div className="py-3">
+          {" "}
+          <TRInput isRequired label="Mobile" name="mobileNumber" />
+        </div>
+        <div className="py-3">
+          {" "}
+          <TRInput isRequired label="Email" name="email" type="email" />
+        </div>
+        <div className="py-3">
+          {" "}
+          <TRInput
+            isRequired
+            label="Password"
+            name="password"
+            type="password"
+          />
+        </div>
 
-      <div className="flex gap-2 justify-end">
-        <Button fullWidth color="primary" type="submit">
-          Registration
-        </Button>
-      </div>
-      <p className="text-center text-small py-2">
-        Already have an account?{" "}
-        <Link className="text-blue-700 hover:text-blue-500" href={"/login"}>
-          Login
-        </Link>
-      </p>
-    </TRForm>
+        <div className="flex gap-2 justify-end">
+          <Button fullWidth color="primary" type="submit">
+            Registration
+          </Button>
+        </div>
+        <p className="text-center text-small py-2">
+          Already have an account?{" "}
+          <Link className="text-blue-700 hover:text-blue-500" href={"/login"}>
+            Login
+          </Link>
+        </p>
+      </TRForm>
     </>
   );
 };

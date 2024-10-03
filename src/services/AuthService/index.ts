@@ -98,3 +98,26 @@ export const getNewAccessToken = async () => {
     throw new Error("Failed to get new access token");
   }
 };
+
+
+export const changePassword = async(updatePassword:FieldValues)=>{
+
+  try{
+    
+
+    
+    const res = await nexiosInstance.post<any>('/auth/change-password',{
+      "oldPassword":updatePassword.oldPassword,
+      "newPassword":updatePassword.newPassword,
+    },
+    
+        )
+
+
+    return res.data;
+
+  }catch(error:any){
+    throw new Error(error)
+  }
+
+}

@@ -6,30 +6,60 @@ import React, { useState } from "react";
 
 import TRInput from "@/components/forms/TRInput";
 import TRForm from "@/components/forms/TRFrom";
+import { changePassword, logout } from "@/services/AuthService";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import Loading from "@/components/shared/Loading";
+
+
+interface IPassword{
+    old_password:string,
+     newPassword:string
+     confirmPassword:string
+}
 
 const PasswordNSecurity = () => {
   const [showPassword, setShowPaswword] = useState<boolean>(false);
   const [msg,setMsg]=useState('')
-  const [passwordData, setPasswodcheck] = useState<{
-    password: string;
-    confirmPassword: string;
-  }>({
-    password: "",
-    confirmPassword: "",
-  });
+  const [isPending,setIsPending]=useState(false)
+  const router = useRouter()
 
-//   const handleConfirmPassword = async ()=>{
-//     const {passwordData,confirmPassword}=passwordData;
-//     if(password !== confirm){
-//         setMsg("confirm password does'nt matched")
-//     }
-//   }
 
-  const handleSendPassword = (data) => {
-    console.log(data);
+
+
+  const handleSendPassword = async (data:IPassword) => {
+    
+
+    const updatePassword = {
+        oldPassword:data.old_password,
+        newPassword:data.newPassword
+    }
+   
+  
+    if(data.newPassword !== data.confirmPassword){
+
+        setMsg("confirm password doesn't matched")
+    }else{
+        setIsPending(true)
+        const res= await changePassword(updatePassword);
+        
+        setMsg('')
+        if(res.success){
+            toast.success(res.message)
+            logout()
+            router.push('/login')
+            setIsPending(false)
+        }
+
+        
+    }
+    
+        
   };
 
   return (
+   <>
+   {isPending && <Loading/> }
     <div className="flex md:py-14 flex-col justify-center items-center">
       <div className="border min-w-xl xl:px-40 mx-auto border-slate-500/45 shadow-md text-center rounded-xl bg-slate-600/5 p-10">
         <div className="flex p-5  flex-col justify-center items-center">
@@ -51,7 +81,7 @@ const PasswordNSecurity = () => {
           <div className="py-3">
             <TRInput
               label="new password"
-              name="password"
+              name="newPassword"
               size="sm"
               type={showPassword ? "text" : "password"}
             />
@@ -59,7 +89,7 @@ const PasswordNSecurity = () => {
           <div className="py-3">
             <TRInput
               label="confirm password"
-              name="password"
+              name="confirmPassword"
               size="sm"
               type={showPassword ? "text" : "password"}
             />
@@ -84,6 +114,7 @@ const PasswordNSecurity = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 

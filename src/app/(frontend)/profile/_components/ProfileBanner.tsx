@@ -9,7 +9,7 @@ import ProfileEditModal from './_modal/ProfileEditModal';
 import ChangeProfileImage from './_modal/ChangeProfileImage';
 
 
-const ProfileBanner = () => {
+const ProfileBanner = ({myProfileData}) => {
     const {user,isLoading}=useUser()
    
     
@@ -32,12 +32,12 @@ const ProfileBanner = () => {
               <div className="flex relative items-center gap-6">
                 <Image
                   className="md:w-40 md:h-40 w-24 shadow hover:shadow-lg shadow-primary-300 rounded-full"
-                  src={user?.profilePhoto}
+                  src={myProfileData?.profilePhoto}
                 />
                 <ChangeProfileImage/>
                 <div>
-                  <h3 className="text-xl md:text-3xl">{user?.name}</h3>
-                  <p className="text-sm font-extralight">@{user?.email?.split('@')[0]}</p>
+                  <h3 className="text-xl md:text-3xl">{myProfileData?.name}</h3>
+                  <p className="text-sm font-extralight">@{myProfileData?.email?.split('@')[0]}</p>
                 </div>
               </div>
      
@@ -72,7 +72,7 @@ const ProfileBanner = () => {
                 <Button size="sm">Invite Others</Button>
               </div>
             </section>
-          <ProfileEditModal/>
+          <ProfileEditModal myProfileData = {myProfileData} />
           </div>
 
            

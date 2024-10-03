@@ -22,7 +22,7 @@ const MyProfile = async () => {
     <>
       <div>
       
-       <ProfileBanner />
+       <ProfileBanner myProfileData = {userData} />
      
        
        

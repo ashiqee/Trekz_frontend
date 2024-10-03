@@ -14,15 +14,17 @@ import React from "react";
 import TRForm from "@/components/forms/TRFrom";
 import TRInput from "@/components/forms/TRInput";
 import { useUser } from "@/context/user.provider";
+import { updateProfile } from "@/services/ProfileService";
 
-const ProfileEditModal =  () => {
+const ProfileEditModal =  ({myProfileData}) => {
  const {user}=useUser()
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
 
 
+
   const handleProfileEdit = (data) => {
-    console.log(data);
+    updateProfile(data);
   };
 
   return (
@@ -47,8 +49,8 @@ const ProfileEditModal =  () => {
                 <TRForm
                  
                   defaultValues={{
-                    name: `${user?.name}`,
-                    mobileNumber: `${user?.mobileNumber}`,
+                    name: `${myProfileData?.name}`,
+                    mobileNumber: `${myProfileData?.mobileNumber}`,
                    
                   }}
                   onSubmit={handleProfileEdit}

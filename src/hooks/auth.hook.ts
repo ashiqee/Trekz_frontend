@@ -34,10 +34,10 @@ export const useUserLogin = ()=>{
         onSuccess:(res)=>{
             if (res.success) {
                 toast.success(res.message);
-                return res;
+               
               } else {
-                toast.error(res.message); // Show error message if `success` is false
-                throw new Error(res.message); // Throw an error to trigger `onError` in useMutation
+                toast.error(res.message); 
+                throw new Error(res.message); 
               }
         },
         onError:(error)=>{

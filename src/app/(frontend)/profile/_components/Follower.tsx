@@ -24,7 +24,7 @@ const Followers =  ({ followData,currentUserFollower }: IfollowProps) => {
   
     <>
       <p className="mb-10">Total Followers: {followData.length}</p>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2 md:gap-4">
         {followData?.map((data) => {
           // Check if the current user follows  user
           const isFollower = currentUserFollower?.some(

@@ -61,10 +61,10 @@ const ProfileMenuTab = ({ userData ,postsData,currentUserIsFollow }: any) => {
               isActiveTab === i &&
               "bg-gradient-to-b dark:from-slate-900/45 dark:to-slate-900 bg-sky-900/75 rounded-t-[20px] text-white  "
             } 
-               md:font-bold text-center  p-1.5 px-4 md:px-10 `}
+               md:font-bold text-center text-[13px] md:text-sm  p-1.5 px-3 md:px-10 `}
           >
             <button onClick={() => setActiveTab(i)}>{data.tabTitle}</button>
-           {data.count>0 && <span className="bg-slate-700/75 p-0.5 rounded-full px-1.5 relative bottom-2 text-[10px]">{ data.count}</span> } 
+           {data.count>0 && <span className="bg-slate-700/75 p-0.5 rounded-full px-1.5 relative bottom-0 md:bottom-2 text-[10px]">{ data.count}</span> } 
           </li>
         ))}
       </ul>

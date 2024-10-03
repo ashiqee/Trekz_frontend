@@ -1,3 +1,4 @@
+
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -28,7 +29,9 @@ export const Navbar = async () => {
  
   const user= await getCurrentUser()
 
-
+// const handleLogout =()=>{
+//   logout()
+// }
   
   const searchInput = (
     <Input
@@ -105,9 +108,13 @@ export const Navbar = async () => {
               >
                 {item.label}
               </Link>
+             
             </NavbarMenuItem>
           ))}
         </div>
+        <NavbarItem className="ml-4">
+          {user ? <Button  color="danger">Logout</Button>:<Link href="'/login">Login</Link>}
+        </NavbarItem>
       </NavbarMenu>
     </NextUINavbar>
   );

@@ -50,7 +50,7 @@ const FollowCard =  ({ data,isFollower }: FollowCardProps) => {
       <Link href={`/profile/${data._id}`}> 
         <Image
           alt="Card background"
-          className="object-cover  rounded-xl"
+          className="object-cover h-48  rounded-xl"
           src={data.profilePhoto}
           width={140}
         />

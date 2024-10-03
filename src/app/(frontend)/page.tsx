@@ -19,7 +19,7 @@ export default async function Home() {
     <div className="hidden md:block">
       LeftBar
     </div>
-      <div className="inline-block max-w-2xl mx-auto  justify-center">
+      <div className="inline-block max-w-3xl mx-auto  justify-center">
        
 <Timeline  datas={posts}/>
       

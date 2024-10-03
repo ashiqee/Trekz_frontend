@@ -34,6 +34,7 @@ export const removeFollowing = async (followId:string) => {
       followId:followId});
  
       revalidateTag("user")
+      revalidateTag("follow")
 
    return  data;
   

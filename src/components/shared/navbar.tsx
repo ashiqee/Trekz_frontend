@@ -68,7 +68,7 @@ export const Navbar = async () => {
         justify="end"
       >
         <NavbarItem>
-        <Menubar />
+       {user?.email &&  <Menubar />}
 
         </NavbarItem>
         <NavbarItem className="hidden md:flex">

@@ -5,6 +5,7 @@ import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
 
 import nexiosInstance from "@/config/naxios.config";
+import { redirect } from "next/navigation";
 
 // registration part
 
@@ -50,6 +51,7 @@ export const loginUser = async (userData: FieldValues) => {
 export const logout = () => {
   cookies().delete("accessToken");
   cookies().delete("refreshToken");
+  redirect('/login')
 };
 
 // get current user

@@ -1,14 +1,14 @@
 "use server";
 
-import nexiosInstance from "@/config/naxios.config";
+
+import { revalidateTag } from "next/cache";
+import { FieldValues } from "react-hook-form";
+
+
 import { getCurrentUser } from "../AuthService";
 
 import axiosInstance from "@/lib/AxiosInstance";
-import { revalidateTag } from "next/cache";
-import { FieldValues } from "react-hook-form";
-import axios from "axios";
-import envConfig from "@/config/envConfig";
-import { toast } from "sonner";
+import nexiosInstance from "@/config/naxios.config";
 
 export const getMyUserData = async () => {
   const user = await getCurrentUser();
@@ -55,6 +55,20 @@ export const updateProfile = async (formData:any) => {
     if(data){
       revalidateTag("user")
     }
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+
+// payment api 
+
+export const createPremiumUser = async (userData: FieldValues) => {
+  try {
+    const { data } = await nexiosInstance.post<any>("/profile/subcribe", userData);
+
 
     return data;
   } catch (error: any) {

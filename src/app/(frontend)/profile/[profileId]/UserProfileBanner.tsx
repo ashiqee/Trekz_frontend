@@ -1,6 +1,6 @@
 'use client'
 import { Image, Tooltip } from '@nextui-org/react';
-import { Facebook, Share2, Star } from 'lucide-react';
+import { Facebook, Share2, Star, Verified } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
@@ -35,7 +35,9 @@ if(!user){
                   src={userDetails?.profilePhoto}
                 />
                 <div className=''>
-                  <h3 className="text-md md:text-3xl">{userDetails?.name}</h3>
+                  <h3 className="text-md flex  md:text-3xl">
+                    {userDetails?.name} 
+                    {<Tooltip content="Verified"><span className="text-blue-400"><Verified size={24}  /></span></Tooltip>}</h3> 
                   <p className="text-sm  font-extralight">@{userDetails?.email?.split('@')[0]}</p>
                 </div>
               </div>
@@ -68,7 +70,7 @@ if(!user){
                   </Tooltip>
                 </div>
     
-                <FollowAction userDetails={userDetails} userId={user._id}/>
+               {user._id !== userDetails._id &&  <FollowAction userDetails={userDetails} userId={user._id}/>}
               </div>
             </section>
           </div>

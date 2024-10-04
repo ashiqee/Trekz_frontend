@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Avatar, Divider } from "@nextui-org/react";
-import { Globe, ThumbsDown, ThumbsUp } from "lucide-react";
+import { Avatar, Divider, Tooltip } from "@nextui-org/react";
+import { Globe, ThumbsDown, ThumbsUp, Verified } from "lucide-react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -58,6 +58,9 @@ const PostCard = ({ post }: { post: any }) => {
     reset();
   };
 
+ 
+  
+
   return (
     <div className="md:p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
       <div className="px-5">
@@ -65,14 +68,16 @@ const PostCard = ({ post }: { post: any }) => {
         <div className="flex gap-3 items-center">
           <Link href={user ? `/profile/${post?.user?._id}`:'/login'}>
             <Avatar src={post?.user?.profilePhoto} />
+            
           </Link>
           <div className="flex justify-between  w-full">
             <div className="flex  font-medium flex-col">
               <div className="flex items-center gap-4 ">
                 {" "}
-                <Link href={user ? `/profile/${post?.user?._id}`:'/login'}>
+                <Link className="flex gap-1 items-center" href={user ? `/profile/${post?.user?._id}`:'/login'}>
                   {" "}
-                  <p>{post?.user?.name}</p>
+                  <p>{post?.user?.name}</p> 
+                  {post?.user?.isVerified && <Tooltip content="Verified"><span className="text-blue-500"><Verified size={14}  /></span></Tooltip>} 
                 </Link>
               </div>
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">

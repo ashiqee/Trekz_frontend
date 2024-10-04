@@ -5,6 +5,8 @@ import Timeline from "./_components/Timeline";
 import Follow from "./_components/Follow";
 import Followers from "./_components/Follower";
 import AboutMe from "./_components/AboutMe";
+import { Verified } from "lucide-react";
+import { Tooltip } from "@nextui-org/react";
 
 const ProfileMenuTab = ({ userData ,postsData,currentUserIsFollow }: any) => {
   const [isActiveTab, setActiveTab] = useState(0);
@@ -80,7 +82,13 @@ const ProfileMenuTab = ({ userData ,postsData,currentUserIsFollow }: any) => {
                  <p>Email: {userData?.email}</p>
                  <p>Mobile: {userData?.mobileNumber}</p>
                  <p>Role: {userData?.role}</p>
-                 <p>Verification Status: {userData?.isVerified ? "Verified":"Not Verify"}</p>
+                 <p className="flex gap-1 items-center">Verification Status: {userData?.isVerified  ?
+                  <Tooltip content="Verified">
+                  
+                    <span className="text-blue-500 flex items-center gap-1">Verified<Verified size={24}  /></span></Tooltip>
+                 :
+                 
+                 "Not Verify"} </p>
              </div>
         </div>
       </main>

@@ -52,19 +52,15 @@ export const getAllPosts = async (query:Record<string,any>) => {
 };
 
 export const getAPostsDetails = async (id:Record<string,any>) => {
-  let fetchOptions = {};
-
-  fetchOptions = {
-    cache: "no-store",
-  };
  
-    const res = await fetch(`${envConfig.baseApi}/posts/${id}`, fetchOptions);
+ 
+    const {data} = await axiosInstance.get(`/posts/${id}`);
 
-  if (!res.ok) {
+  if (!data.success) {
     throw new Error('Failed to fetch posts');
   }
 
-  return res.json();
+  return data;
 };
 
 export const getMyPosts = async () => {

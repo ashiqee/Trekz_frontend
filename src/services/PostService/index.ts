@@ -51,6 +51,22 @@ export const getAllPosts = async (query:Record<string,any>) => {
   return res.json();
 };
 
+export const getAPostsDetails = async (id:Record<string,any>) => {
+  let fetchOptions = {};
+
+  fetchOptions = {
+    cache: "no-store",
+  };
+ 
+    const res = await fetch(`${envConfig.baseApi}/posts/${id}`, fetchOptions);
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch posts');
+  }
+
+  return res.json();
+};
+
 export const getMyPosts = async () => {
   const user = await getCurrentUser();
 

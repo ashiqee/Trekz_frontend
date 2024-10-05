@@ -65,7 +65,7 @@ const PostCard = ({ post }: { post: any }) => {
     {!post && <PostsSkeleton/>}
     
     {
-      post && <div className="md:p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+      post && <div className="md:p-4  bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">
@@ -125,7 +125,7 @@ const PostCard = ({ post }: { post: any }) => {
               <VideoCard catergory={post?.category} video={post?.video} />
             ) : (
               <>
-                <ImageCard catergory={post?.category} images={post?.images} />
+                <ImageCard postId={post._id} catergory={post?.category} images={post?.images} />
                 {/* <ImageGallery images={images} /> */}
               </>
             )}

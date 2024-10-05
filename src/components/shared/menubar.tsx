@@ -48,10 +48,10 @@ const Menubar = () => {
               // <><div>{item.modal}</div></>
             ) : (
               <Link
-                className="data-[active=true]:text-primary data-[active=true]:font-medium "
+                className="data-[active=true]:text-primary data-[active=true]:font-medium  "
                 href={item.href}
               >
-                {item.icon}
+                <p className="pt-1.5">{item.icon}</p>
               </Link>
             )}
           </Tooltip>

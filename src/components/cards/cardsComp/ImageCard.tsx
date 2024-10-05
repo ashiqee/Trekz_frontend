@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const ImageCard = ({images,catergory}:{images:string[],catergory:string}) => {
+const ImageCard = ({images,catergory,postId}:{images:string[],catergory:string,postId:string}) => {
 
   
     return (
@@ -12,7 +12,7 @@ const ImageCard = ({images,catergory}:{images:string[],catergory:string}) => {
           <Link
             key={index}
             className={`w-full  ${images.length === 3 && index === 0 ? "col-span-2" : "col-span-1"}`}
-            href={`/post/${index}`}
+            href={`/post/${postId}`}
           >
             <Image
               alt={`image-${index}`}
@@ -21,7 +21,7 @@ const ImageCard = ({images,catergory}:{images:string[],catergory:string}) => {
               src={image}
               width={500}
             />
-            {catergory && <p className='bg-slate-900/85  w-fit px-4 p-1 uppercase text-sm font-bold absolute top-3 z-50 rounded-lg right-3'>{catergory}</p>
+            {catergory && <p className='bg-slate-900/85 text-white w-fit px-4 p-1 uppercase text-sm font-bold absolute top-3 z-50 rounded-lg right-3'>{catergory}</p>
          }
           </Link>
         ))}

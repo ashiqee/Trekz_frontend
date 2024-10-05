@@ -11,7 +11,6 @@ import { Tooltip } from "@nextui-org/react";
 const ProfileMenuTab = ({ userData ,postsData,currentUserIsFollow }: any) => {
   const [isActiveTab, setActiveTab] = useState(0);
 
-  console.log(currentUserIsFollow);
   
 
   const tabDatas = [

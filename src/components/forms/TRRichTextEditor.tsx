@@ -1,24 +1,27 @@
 "use client";
 
-import { Editor, EditorState, Modifier, RichUtils,convertToRaw  } from "draft-js";
+import {
+  Editor,
+  EditorState,
+  Modifier,
+  RichUtils,
+  convertToRaw,
+} from "draft-js";
 import "draft-js/dist/Draft.css";
 import { Italic, Bold, Underline, Strikethrough, Smile } from "lucide-react";
 import { useRef, useState } from "react";
-import draftToHtml from 'draftjs-to-html';
+import draftToHtml from "draftjs-to-html";
 
-const TRRichTextEditor = ({ onChange }:{onChange:any}) => {
+const TRRichTextEditor = ({ onChange }: { onChange: any }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
 
   const [isOpenEmoji, setOpenEmoji] = useState(false);
 
-  
-
   const handleChange = (state: EditorState) => {
     setEditorState(state);
     if (onChange) {
-     
       onChange(editorState);
     }
   };
@@ -74,9 +77,6 @@ const TRRichTextEditor = ({ onChange }:{onChange:any}) => {
     setOpenEmoji(false);
   };
 
-
-
-
   return (
     <div className="min-h-20">
       {/* Toolbar */}
@@ -122,7 +122,6 @@ const TRRichTextEditor = ({ onChange }:{onChange:any}) => {
                 className="hover:bg-slate-200 rounded p-1"
                 onClick={() => {
                   insertEmoji(emoji);
-                  
                 }}
               >
                 {emoji}
@@ -131,7 +130,6 @@ const TRRichTextEditor = ({ onChange }:{onChange:any}) => {
           </div>
         )}
       </div>
-    
     </div>
   );
 };

@@ -23,23 +23,41 @@ import { useUser } from "@/context/user.provider";
 import { useCreatePosts } from "@/hooks/posts.hook";
 
 const CreateNewPostModal = () => {
-const router = useRouter()
+  const router = useRouter();
   const { user } = useUser();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [editorContent, setEditorContent] = useState("");
 
-  const {mutate: handleCreatePost, isPending,isSuccess }= useCreatePosts()
+  const { mutate: handleCreatePost, isPending, isSuccess } = useCreatePosts();
 
   const [images, setImages] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const [videoId, setVideoId] = useState("");
+  const [tags, setTags] = useState<string[] | []>([]);
+  const [category, setCategory] = useState('');
 
   
 
+  const handleTags = (data:string) => {
+    const splitData = data?.split(",");
+
+    const tagsData = splitData.filter((i: string) => i !== "");
+  
+    setTags(tagsData);
+  };
+
+
+ 
+  const handleCategory =(data:string)=>{
+
+    setCategory(data)
+
+  }
+
   const handleEditorChange = (editorState: any) => {
     const contentState = editorState.getCurrentContent();
-    const rawContentState = convertToRaw(contentState); // Convert ContentState to RawDraftContentState
-    const htmlContent = draftToHtml(rawContentState); // Convert to HTML
+    const rawContentState = convertToRaw(contentState);
+    const htmlContent = draftToHtml(rawContentState);
 
     setEditorContent(htmlContent);
   };
@@ -62,30 +80,33 @@ const router = useRouter()
   const handleSubmitPost = async () => {
     const formData = new FormData();
 
-    const postDetails ={
+   console.log(tags,category);
+   
+    
+    const postDetails = {
       user: user!._id,
       postContent: editorContent,
       video: videoId,
+      tags: tags,
+      category:category
     };
 
-    formData.append('data', JSON.stringify(postDetails));
+    formData.append("data", JSON.stringify(postDetails));
 
     for (let image of images) {
       formData.append("images", image);
     }
 
-
-    
-   handleCreatePost(formData)
+    handleCreatePost(formData);
   };
 
-  const handleModal =()=>{
-    if(user){
-      onOpenChange()
-    }else{
-      router.push('/login')
+  const handleModal = () => {
+    if (user) {
+      onOpenChange();
+    } else {
+      router.push("/login");
     }
-  }
+  };
 
   return (
     <>
@@ -93,7 +114,6 @@ const router = useRouter()
         className="w-full p-5 space-y-4 cursor-pointer"
         role="button"
         tabIndex={0}
-        
         onClick={handleModal}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -130,9 +150,32 @@ const router = useRouter()
               </ModalHeader>
               <ModalBody>
                 <div className="bg-slate-300/5 p-4 min-h-40 rounded-md">
-                  
-
                   <TRRichTextEditor onChange={handleEditorChange} />
+                  <form>
+                    <Input
+                      className="my-1.5 "
+                      placeholder="please add some tag sperate with comma ','"
+                      onChange={(e) => handleTags(e.target.value)}
+                    />
+
+                    <select className="w-full   bg-slate-600/20 hover:bg-slate-900/85  p-2 rounded-lg mb-4" onChange={(e)=>handleCategory(e.target.value)}>
+                      <option value={"category"} disabled selected>
+                        Select category
+                      </option>
+                      <option value="destinations">Destinations</option>
+                      <option value="travel-tips">Travel Tips</option>
+                      <option value="activities">Activities</option>
+                      <option value="accommodations">Accommodations</option>
+                      <option value="transportation">Transportation</option>
+                      <option value="travel-themes">Travel Themes</option>
+                      <option value="seasonal-travel">Seasonal Travel</option>
+                      <option value="travel-planning">Travel Planning</option>
+                      <option value="health-safety">Health and Safety</option>
+                      <option value="cultural-insights">
+                        Cultural Insights
+                      </option>
+                    </select>
+                  </form>
 
                   {imagePreviews.length ? (
                     <>

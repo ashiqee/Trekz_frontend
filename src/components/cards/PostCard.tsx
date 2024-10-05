@@ -22,7 +22,6 @@ import {
 } from "@/hooks/posts.hook";
 import { useUser } from "@/context/user.provider";
 
-
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();
   const { reset } = useForm();
@@ -58,26 +57,33 @@ const PostCard = ({ post }: { post: any }) => {
     reset();
   };
 
- 
-  
+  console.log(post.category);
 
   return (
     <div className="md:p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">
-          <Link href={user ? `/profile/${post?.user?._id}`:'/login'}>
+          <Link href={user ? `/profile/${post?.user?._id}` : "/login"}>
             <Avatar src={post?.user?.profilePhoto} />
-            
           </Link>
           <div className="flex justify-between  w-full">
             <div className="flex  font-medium flex-col">
               <div className="flex items-center gap-4 ">
                 {" "}
-                <Link className="flex gap-1 items-center" href={user ? `/profile/${post?.user?._id}`:'/login'}>
+                <Link
+                  className="flex gap-1 items-center"
+                  href={user ? `/profile/${post?.user?._id}` : "/login"}
+                >
                   {" "}
-                  <p>{post?.user?.name}</p> 
-                  {post?.user?.isVerified && <Tooltip content="Verified"><span className="text-blue-500"><Verified size={14}  /></span></Tooltip>} 
+                  <p>{post?.user?.name}</p>
+                  {post?.user?.isVerified && (
+                    <Tooltip content="Verified">
+                      <span className="text-blue-500">
+                        <Verified size={14} />
+                      </span>
+                    </Tooltip>
+                  )}
                 </Link>
               </div>
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">
@@ -95,13 +101,26 @@ const PostCard = ({ post }: { post: any }) => {
           {/* if text post available show  */}
           {/* todo condition  */}
           <div dangerouslySetInnerHTML={{ __html: post.postContent }} />
-          {/* if image here show  */}
+
+          {/* Tags  */}
+          {post.tags && (
+            <div className="flex gap-2">
+              {post.tags.map((t: string, i: number) => (
+                <small
+                  key={i}
+                  className="bg-slate-700/45 p-0.5 px-2 rounded-md"
+                >
+                  #{t}
+                </small>
+              ))}
+            </div>
+          )}
           <div>
             {post?.video?.length > 0 ? (
-              <VideoCard video={post?.video} />
+              <VideoCard catergory={post?.category} video={post?.video} />
             ) : (
               <>
-                <ImageCard images={post?.images} />
+                <ImageCard catergory={post?.category} images={post?.images} />
                 {/* <ImageGallery images={images} /> */}
               </>
             )}
@@ -125,7 +144,7 @@ const PostCard = ({ post }: { post: any }) => {
           {/* comment collection  */}
           <Divider />
 
-          {post.comments?.map((cmt:any) => (
+          {post.comments?.map((cmt: any) => (
             <div key={cmt._id} className="py-2 flex  gap-1.5">
               <Avatar size="sm" src={cmt.user.profilePhoto} />
               <div className="flex items-center gap-2">

@@ -2,7 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const ImageCard = ({images}:{images:string[]}) => {
+const ImageCard = ({images,catergory}:{images:string[],catergory:string}) => {
+
+  
     return (
         <div   className={` mt-2 gap-1.5 relative   grid place-items-center ${images.length === 1 ? "grid-cols-1" : "grid-cols-2"} `}
       >
@@ -19,7 +21,8 @@ const ImageCard = ({images}:{images:string[]}) => {
               src={image}
               width={500}
             />
-         
+            {catergory && <p className='bg-slate-900/85  w-fit px-4 p-1 uppercase text-sm font-bold absolute top-3 z-50 rounded-lg right-3'>{catergory}</p>
+         }
           </Link>
         ))}
            {images.length > 4 && <div className="absolute text-slate-200   p-10  z-50 right-[15%] bottom-[12%] 2xl:text-5xl font-bold text-3xl">+{images.length-4}</div>

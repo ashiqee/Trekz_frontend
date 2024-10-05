@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Card, CardHeader, CardBody, Image, Button, Spinner } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image, Button, Spinner, Tooltip } from "@nextui-org/react";
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { Star, Verified } from "lucide-react";
 import { addFollowing, removeFollowing } from "@/services/FollowService";
 import { getCurrentUser } from "@/services/AuthService";
 import { toast } from "sonner";
@@ -15,6 +15,7 @@ interface Ifollow {
   _id: string;
   name: string;
   profilePhoto: string;
+  isVerified:boolean;
 }
 
 interface FollowCardProps {
@@ -44,7 +45,12 @@ const FollowCard =  ({ data,isFollower }: FollowCardProps) => {
    
     <Card key={data._id} className="py-3 bg-slate-600/35">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-      <Link href={`/profile/${data._id}`}>  <p className="text-tiny uppercase font-bold">{data.name}</p> </Link>
+      <Link href={`/profile/${data._id}`}>  <p className="text-tiny flex gap-1 uppercase font-bold">
+        
+        {data.name}
+        
+        {data.isVerified && <Tooltip content="Verified"><span className="text-blue-500"><Verified size={14}  /></span></Tooltip>} 
+        </p> </Link>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
       <Link href={`/profile/${data._id}`}> 

@@ -45,10 +45,10 @@ const Menubar = () => {
               <>
                         {item?.modal}
               </>
-             
+              // <><div>{item.modal}</div></>
             ) : (
               <Link
-                className="data-[active=true]:text-primary data-[active=true]:font-medium mt-1.5"
+                className="data-[active=true]:text-primary data-[active=true]:font-medium "
                 href={item.href}
               >
                 {item.icon}

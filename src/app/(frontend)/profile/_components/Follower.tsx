@@ -8,6 +8,7 @@ interface Ifollow {
   _id: string;
   name: string;
   profilePhoto: string;
+  isVerified:boolean;
 }
 
 interface IfollowProps {

@@ -21,6 +21,7 @@ import {
   useUpvotePost,
 } from "@/hooks/posts.hook";
 import { useUser } from "@/context/user.provider";
+import PostsSkeleton from "../skeletons/PostsSkeleton";
 
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();
@@ -57,10 +58,14 @@ const PostCard = ({ post }: { post: any }) => {
     reset();
   };
 
-  console.log(post.category);
+ 
 
   return (
-    <div className="md:p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+    <>
+    {!post && <PostsSkeleton/>}
+    
+    {
+      post && <div className="md:p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
       <div className="px-5">
         {/* post top  */}
         <div className="flex gap-3 items-center">
@@ -88,7 +93,7 @@ const PostCard = ({ post }: { post: any }) => {
               </div>
               <small className="text-[10px] flex text-black items-center gap-1 dark:text-slate-300/75">
                 {" "}
-                <Globe size={11} /> published: {post?.createdAt?.slice(0, 10)}
+                <Globe size={11} /> published: {post?.createdAt?.slice(0, 10)} | {post?.createdAt?.slice(11,16)} {post?.createdAt?.slice(11,13) >= 12 ? "PM":"AM"}
               </small>
             </div>
 
@@ -177,6 +182,8 @@ const PostCard = ({ post }: { post: any }) => {
         </section>
       </div>
     </div>
+    }
+    </>
   );
 };
 

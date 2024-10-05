@@ -6,7 +6,8 @@ import FollowCard from './FollowCard';
 interface Ifollow{
     _id:string,
     name:string,
-    profilePhoto:string
+    profilePhoto:string,
+    isVerified:boolean
 }
 
 interface IfollowProps{
@@ -30,11 +31,13 @@ const Follow = ({followData,currentUserFollower}:IfollowProps) => {
             );
   
             return (
-              <FollowCard 
-                key={data._id}
-                data={data} 
+           
+               <FollowCard 
+               key={data._id}
+                 data={data} 
                 isFollower={isFollower} 
               />
+            
             );
           })}
         </div>

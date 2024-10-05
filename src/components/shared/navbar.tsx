@@ -1,4 +1,4 @@
-
+"use client"
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -22,16 +22,13 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
-import { getCurrentUser } from "@/services/AuthService";
+import { useUser } from "@/context/user.provider";
 
-export const Navbar = async () => {
+export const Navbar = () => {
 
+  const {user} = useUser()
  
-  const user= await getCurrentUser()
 
-// const handleLogout =()=>{
-//   logout()
-// }
   
   const searchInput = (
     <Input

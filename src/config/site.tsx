@@ -7,24 +7,7 @@ import MenuCard from "@/components/shared/MenuCard";
 export const siteConfig = {
   name: "Next.js + NextUI",
   description: "Make beautiful websites regardless of your design experience.",
-  navItems: [
-    {
-      label: "Home",
-      icon: <House size={20}/>,
-      href: "/",
-    },
-    {
-      label: "Menu",
-      icon: <LayoutGrid size={20} />,
-      modal:<><MenuCard icon={<LayoutGrid size={20}/>}/></>
-    },
-    {
-      label: "Notification",
-      icon: <Bell />,
-      modal: <><NotificationModal icon={<Bell size={20} />}/></>,
-    },
-    
-  ],
+
   navMenuCardItems: [
     {
       label: "Profile",

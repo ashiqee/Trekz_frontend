@@ -80,7 +80,7 @@ const CreateNewPostModal = () => {
   const handleSubmitPost = async () => {
     const formData = new FormData();
 
-   console.log(tags,category);
+
    
     
     const postDetails = {

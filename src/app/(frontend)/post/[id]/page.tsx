@@ -2,6 +2,7 @@ import React from 'react';
 import ImageSlider from './_component/ImageSlider';
 import { getAPostsDetails } from '@/services/PostService';
 import PostDetailsRightBar from './_component/PostDetailsRightBar';
+import CommentSection from './_component/CommentSection';
 
 const PostDetails = async ({params}:{params:any}) => {
 
@@ -21,6 +22,7 @@ const {data:PostDetails} = await getAPostsDetails(params.id)
 
             <div>
                 <PostDetailsRightBar post={PostDetails}/>
+                <CommentSection commentData={PostDetails.comments}/>
             </div>
         </div>
     );

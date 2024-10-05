@@ -11,26 +11,7 @@ const ImageSlider = ({ images }: { images: string[] }) => {
 
   return (
     <>
-      {/* <Swiper className="mySwiper" modules={[Navigation]} navigation={true}>
-        {images.map((img: string, i: number) => (
-          <SwiperSlide
-            key={i}
-            className="xl:min-w-full min-h-[35vh] border flex flex-col justify-center items-center 
-             xl:min-h-[80vh] xl:max-h-[80vh]
-             rounded-md shadow-md shadow-blue-700/15"
-          >
-            <div className="w-full h-full">
-            <Image
-              alt="images"
-            //   className="xl:min-w-[68vw] xl:min-h-[80vh] min-h-[35vh] xl:max-h-[80vh]  object-cover rounded-md shadow-md shadow-blue-700/15"
-              className=" rounded-md mx-auto shadow-md shadow-blue-700/15"
-              src={img}
-            />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
-
+      
       <div
         className=" min-h-[35vh] bg-slate-500/10 flex flex-col justify-center items-center overflow-hidden
              xl:min-h-[80vh] xl:max-h-[80vh] xl:min-w-[65vw]

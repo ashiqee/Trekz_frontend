@@ -16,7 +16,7 @@ const MenuCard = ({ icon }: { icon: ReactNode }) => {
       </button>
       {open && (
         <div
-          className="absolute rounded-md shadow-blue-950/75 shadow-md z-10 top-16 right-16 w-fit h-fit  bg-slate-900"
+          className="absolute rounded-md shadow-blue-950/75 shadow-md z-10 top-16 right-16 w-fit h-fit bg-slate-100/75 dark:bg-slate-900"
           onMouseLeave={() => setOpen(false)}
         >
           <div className="">

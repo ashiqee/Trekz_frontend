@@ -13,7 +13,7 @@ const ImageSlider = ({ images }: { images: string[] }) => {
     <>
       
       <div
-        className=" min-h-[35vh] bg-slate-500/10 flex flex-col justify-center items-center overflow-hidden
+        className=" min-h-[35vh] bg-slate-700/15 flex flex-col justify-center items-center overflow-hidden
              xl:min-h-[80vh] xl:max-h-[80vh] xl:min-w-[65vw]
              rounded-md shadow-md relative shadow-blue-700/15"
       >

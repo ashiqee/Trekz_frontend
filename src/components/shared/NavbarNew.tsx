@@ -23,29 +23,14 @@ import {
   Logo,
 } from "@/components/icons";
 import { useUser } from "@/context/user.provider";
+import DebounceSearch from "./DebounceSearch";
 
 const NavbarNew = () => {
     const {user} = useUser()
  
 
   
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-        
-      }}
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
-
+ 
     return (
         <NextUINavbar className=" dark:bg-gradient-to-b from-slate-900/15 to-slate-900/70" maxWidth="full" position="sticky">
      
@@ -57,7 +42,10 @@ const NavbarNew = () => {
             </NextLink>
           </NavbarBrand>
   
-          <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+          <NavbarItem className="hidden lg:flex">
+        <DebounceSearch/>
+
+          </NavbarItem>
         </NavbarContent>
   
         <NavbarContent
@@ -88,7 +76,7 @@ const NavbarNew = () => {
         </NavbarContent>
   
         <NavbarMenu>
-          {searchInput}
+          <DebounceSearch/>
           <div className="mx-4 mt-2 flex flex-col gap-2">
             {siteConfig.navMenuItems.map((item, index) => (
               <NavbarMenuItem key={`${item}-${index}`}>

@@ -33,10 +33,20 @@ export const createAPost = async (formData: FieldValues) => {
 
 
 // edit a post 
-export const editAPost = async (formData: FieldValues) => {
+export const updateAPost = async (formData: FieldValues) => {
   try {
-    const { data } = await axiosInstance.put<any>(
-      "/posts/create-post",
+
+
+    const dataField = formData.get('data');
+ // Parse the JSON string
+ const parsedData = JSON.parse(dataField as string);
+ const { postId } = parsedData;
+
+  //  console.log("ID>>",postId, "upp>>",updateData);
+   
+
+    const { data } = await axiosInstance.patch<any>(
+      `/posts/update-post/${postId}`,
       formData,
       {
         headers: {

@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import TRRichTextEditor from "../forms/TRRichTextEditor";
 
 import { useUser } from "@/context/user.provider";
-import { useCreatePosts } from "@/hooks/posts.hook";
+import { useCreatePosts, useUpdatePost } from "@/hooks/posts.hook";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EditPostModal = ({
@@ -26,12 +26,15 @@ const EditPostModal = ({
   setIsOpen: any;
 }) => {
   const router = useRouter();
+
+  const postId = postDetails?._id!;
+
   const { user } = useUser();
   const [editorContent, setEditorContent] = useState(postDetails.postContent);
 
-  const { mutate: handleCreatePost, isPending, isSuccess } = useCreatePosts();
+  const { mutate: handleUpdatePost, isPending, isSuccess } = useUpdatePost();
 
-  const [images, setImages] = useState<File[] | []>([]);
+  const [images, setImages] = useState<File[] | []>(postDetails.images);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>(
     postDetails.images
   );
@@ -77,22 +80,25 @@ const EditPostModal = ({
   const handleSubmitPost = async () => {
     const formData = new FormData();
 
-    const postDetails = {
+    const updatePostDetails = {
       user: user!._id,
-      postContent: editorContent,
-      video: videoId,
-      tags: tags,
-      category: category,
+      postContent: editorContent ,
+      tags: tags ,
+      category: category ,
+      postId
     };
 
-    formData.append("data", JSON.stringify(postDetails));
+    formData.append("data", JSON.stringify(updatePostDetails));
 
     for (let image of images) {
       formData.append("images", image);
     }
 
-    handleCreatePost(formData);
+    
+    handleUpdatePost(formData);
   };
+
+ 
 
   const handleRemoveImg = (i: number) => {
     setImagePreviews((prevPreviews) => {

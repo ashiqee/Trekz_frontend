@@ -4,9 +4,9 @@ import nexiosInstance from "@/config/naxios.config";
 
 export const searchItems = async (searchTerm: string) => {
   try {
-    const res = await nexiosInstance.get(`/posts/search?searchTerm=${searchTerm}`);
+    const {data} = await nexiosInstance.get(`/posts/search?searchTerm=${searchTerm}`);
 
-    return res.data;
+    return data;
   } catch (error) {
     throw new Error("Failed to search items");
   }

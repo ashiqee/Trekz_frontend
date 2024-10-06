@@ -48,3 +48,10 @@ export interface IPost  {
   
 }
 
+export interface ISearchResult {
+  catergory: string;
+  tags: string[];
+  postContent: string;
+  images: string;
+  _id: string;
+}

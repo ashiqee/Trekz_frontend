@@ -1,20 +1,30 @@
+"use client"
 import { Input } from '@nextui-org/input';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import {
     SearchIcon,
    
   } from "@/components/icons";
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useDebounce from '@/hooks/debounce.hook';
 import { useSearchItems } from '@/hooks/search.hook';
+import { ISearchResult } from '@/types';
+import SearchPostModal from '../modal/SearchModal';
+
+
+
+
+
 
 const DebounceSearch = () => {
-    const {mutate:handleSearch,data}= useSearchItems()
-    const {register,handleSubmit,watch}= useForm()
-     
+    const {mutate:handleSearch,data,isPending,isSuccess}= useSearchItems()
+    const {register,handleSubmit,watch,reset}= useForm()
+    const [ searchResult,setSearchResult]=useState<ISearchResult[]|[]>([])
+    
 
-    console.log(data);
+   const postsData = data?.data;
+    console.log(postsData);
     
 const searchTerm = useDebounce(watch('search'))
 
@@ -24,10 +34,20 @@ const searchTerm = useDebounce(watch('search'))
         }
     },[searchTerm])
 
-    const onSubmit: SubmitHandler<FieldValues>=(data)=>{
-            console.log(data);
+    const onSubmit: SubmitHandler<FieldValues>=(d)=>{
+            
             
     }
+
+    useEffect(()=>{
+        if(!searchTerm){
+            setSearchResult([])
+        }
+
+        if(!isPending && isSuccess && data && searchTerm){
+            setSearchResult(postsData ?? [])
+        }
+    },[isPending,isSuccess,data,searchTerm])
 
     return (
         <div>
@@ -48,6 +68,8 @@ const searchTerm = useDebounce(watch('search'))
       type="search"
     />
     </form>
+
+{searchResult.length>0 && <SearchPostModal reset={reset} postData={postsData} setIsOpen={setSearchResult}/>}
         </div>
     );
 };

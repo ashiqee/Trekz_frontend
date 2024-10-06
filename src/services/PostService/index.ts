@@ -85,6 +85,8 @@ export const getAllPosts = async (query:Record<string,any>) => {
   return res.json();
 };
 
+
+// get single post details 
 export const getAPostsDetails = async (id:Record<string,any>) => {
  
  
@@ -93,6 +95,22 @@ export const getAPostsDetails = async (id:Record<string,any>) => {
   if (!data.success) {
     throw new Error('Failed to fetch posts');
   }
+
+  return data;
+};
+
+// delete single post 
+export const deletAPost = async (id:Record<string,any>) => {
+ 
+
+ 
+    const {data} = await axiosInstance.delete(`/posts/delete/${id}`);
+
+  if (!data.success) {
+    throw new Error('Failed to deleted post');
+  }
+
+  revalidateTag("post")
 
   return data;
 };

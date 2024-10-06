@@ -11,6 +11,7 @@ import TRInput from "../forms/TRInput";
 import CommentSkeleton from "../skeletons/CommentSkeleton";
 import PostsSkeleton from "../skeletons/PostsSkeleton";
 import EditPostModal from "../modal/EditPostModal";
+import DeletePostModal from "../modal/DeletePostModal";
 
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
 import VideoCard from "./cardsComp/VideoCard";
@@ -38,6 +39,7 @@ const PostCard = ({ post }: { post: any }) => {
   const { user } = useUser();
 
   const [isOpenModal,setIsOpen]= useState(false)
+  const [isOpenDeleteModal,setIsDeleteOpen]= useState(false)
 
   const handleUpvote = () => {
     handleUpvoteToDb(post._id);
@@ -100,7 +102,7 @@ const PostCard = ({ post }: { post: any }) => {
               </small>
             </div>
 
-            <PostActionDropDown postDetails={post} setIsModalOpen={setIsOpen} />
+            <PostActionDropDown setIsDeleteOpen={setIsDeleteOpen} setIsModalOpen={setIsOpen} />
           </div>
         </div>
 
@@ -187,6 +189,7 @@ const PostCard = ({ post }: { post: any }) => {
     </div>
     }
     {isOpenModal && <EditPostModal postDetails={post} setIsOpen={setIsOpen} />}
+    {isOpenDeleteModal && <DeletePostModal postId={post._id} setIsOpen={setIsDeleteOpen} />}
     </>
   );
 };

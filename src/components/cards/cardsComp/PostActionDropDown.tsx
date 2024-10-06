@@ -7,9 +7,9 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Delete, Edit, Ellipsis } from 'lucide-react';
-import EditPostModal from '@/components/modal/EditPostModal';
 
-const PostActionDropDown = ({postDetails,setIsModalOpen}) => {
+
+const PostActionDropDown = ({setIsModalOpen,setIsDeleteOpen}:{setIsModalOpen:any,setIsDeleteOpen:any}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ const PostActionDropDown = ({postDetails,setIsModalOpen}) => {
       <DropdownMenu
         aria-label="Post Actions"
         onMouseEnter={() => setIsOpen(true)} 
-        // onMouseLeave={() => setIsOpen(false)} 
+        onMouseLeave={() => setIsOpen(false)} 
       >
          <DropdownItem
             key="edit"
@@ -44,6 +44,7 @@ const PostActionDropDown = ({postDetails,setIsModalOpen}) => {
           color="danger"
           description="Permanently delete the file"
           startContent={<Delete className={"text-danger"} />}
+          onClick={()=>setIsDeleteOpen(true)}
         >
             Delete post
             </DropdownItem>

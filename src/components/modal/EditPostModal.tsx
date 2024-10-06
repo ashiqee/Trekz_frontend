@@ -138,7 +138,7 @@ const EditPostModal = ({
                 <form>
                   <Input
                     className="my-1.5 "
-                    value={postDetails.tags}
+                    placeholder={postDetails.tags}
                     onChange={(e) => handleTags(e.target.value)}
                   />
 

@@ -45,7 +45,7 @@ const CommentSection = ({post}:{post:any}) => {
     return (
         <div className='w-full '>
              <div className="flex justify-between items-center py-2">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center my-3 gap-4">
               <button className="flex gap-1" onClick={handleUpvote}>
                 <ThumbsUp />
                 {post?.upVotes?.length}
@@ -64,7 +64,7 @@ const CommentSection = ({post}:{post:any}) => {
           <Divider />
 
           {post.comments?.map((cmt: any) => (
-            <div key={cmt._id} className="py-4 flex  gap-1.5">
+            <div key={cmt._id} className="my-4 flex  gap-1.5">
               <Avatar size="sm" src={cmt.user.profilePhoto} />
               <div className="flex items-center gap-2">
                 <div>
@@ -85,7 +85,7 @@ const CommentSection = ({post}:{post:any}) => {
 
           {/* comment input  */}
           {isComPending && <CommentSkeleton />}
-          <div className="flex w-full  gap-1.5">
+          <div className="flex w-full my-4  gap-1.5">
             <Avatar size="sm" src={user?.profilePhoto} />
             <div className="w-full">
               <TRForm onSubmit={handleCommentSubmit}>

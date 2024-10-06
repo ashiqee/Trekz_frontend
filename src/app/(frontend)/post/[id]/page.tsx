@@ -20,7 +20,7 @@ const {data:PostDetails} = await getAPostsDetails(params.id)
                 <ImageSlider images ={PostDetails.images}/>
             </div>
 
-            <div className='w-full bg-slate-700/15 p-6 rounded-lg shadow-lg shadow-blue-700/25'>
+            <div className='w-full bg-slate-700/15 p-6  rounded-lg shadow-lg shadow-blue-700/25'>
                 <PostDetailsRightBar post={PostDetails}/>
                 <CommentSection post={PostDetails}/>
             </div>

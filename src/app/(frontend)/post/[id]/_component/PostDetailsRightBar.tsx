@@ -1,5 +1,7 @@
 "use client";
 import PostActionDropDown from "@/components/cards/cardsComp/PostActionDropDown";
+import DeletePostModal from "@/components/modal/DeletePostModal";
+import EditPostModal from "@/components/modal/EditPostModal";
 import { IPost } from "@/types";
 import { Avatar, Tooltip } from "@nextui-org/react";
 import { Globe, Verified } from "lucide-react";
@@ -9,6 +11,8 @@ import React, { useState } from "react";
 const PostDetailsRightBar = ({ post }:{post:any}) => {
   const [limitCon, setLimitContent] = useState(182);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpenModal,setIsOpen]= useState(false)
+  const [isOpenDeleteModal,setIsDeleteOpen]= useState(false)
 
   const toggleContent = () => {
     if (isExpanded) {
@@ -52,7 +56,7 @@ const PostDetailsRightBar = ({ post }:{post:any}) => {
               </small>
             </div>
 
-            <PostActionDropDown />
+            <PostActionDropDown setIsDeleteOpen={setIsDeleteOpen} setIsModalOpen={setIsOpen} />
           </div>
         </div>
      
@@ -77,6 +81,8 @@ const PostDetailsRightBar = ({ post }:{post:any}) => {
         </button>
       </div>
     </section>
+    {isOpenModal && <EditPostModal postDetails={post} setIsOpen={setIsOpen} />}
+    {isOpenDeleteModal && <DeletePostModal postId={post._id} setIsOpen={setIsDeleteOpen} />}
     </div>
   );
 };

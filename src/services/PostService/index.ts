@@ -108,9 +108,11 @@ export const deletAPost = async (id:Record<string,any>) => {
 
   if (!data.success) {
     throw new Error('Failed to deleted post');
+  }else{
+    revalidateTag("post")
+
   }
 
-  revalidateTag("post")
 
   return data;
 };

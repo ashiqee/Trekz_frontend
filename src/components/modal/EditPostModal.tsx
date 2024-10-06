@@ -16,6 +16,7 @@ import TRRichTextEditor from "../forms/TRRichTextEditor";
 
 import { useUser } from "@/context/user.provider";
 import { useCreatePosts, useUpdatePost } from "@/hooks/posts.hook";
+import PostsSkeleton from "../skeletons/PostsSkeleton";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EditPostModal = ({
@@ -113,7 +114,7 @@ const EditPostModal = ({
   return (
     <>
       {/* modal body  */}
-
+      {isPending && <> <PostsSkeleton/> </>}
       <>
         <div className="fixed   z-40 inset-0 bg-slate-500/35 flex flex-col w-full bg-opacity-75  justify-center items-center ">
           <div className="w-[40vw]">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@nextui-org/button";
 import { CircleAlert, TrashIcon } from "lucide-react";
+import { toast } from "sonner";
 
 import { deletAPost } from "@/services/PostService";
 
@@ -14,7 +15,11 @@ const DeletePostModal = ({
   const handleDeletedPost = async () => {
   const res = await  deletAPost(postId);
 
-  console.log(res);
+if(res.success){
+    toast.success(res.message)
+}else{
+    toast.error("something wrong!")
+}
   
   };
 

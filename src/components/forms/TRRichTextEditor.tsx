@@ -1,5 +1,6 @@
 "use client";
 
+import { Divider } from "@nextui-org/react";
 import {
   Editor,
   EditorState,
@@ -90,7 +91,7 @@ const TRRichTextEditor = ({ onChange,text }: { onChange: any,text:string }) => {
         {editType.map((t, i) => (
           <button
             key={i}
-            className={`mb-2  p-2 rounded-md ${
+            className={`  p-2 rounded-md ${
               currentStyle.has(t.style)
                 ? "bg-slate-200/45"
                 : "hover:bg-slate-200/45"
@@ -101,7 +102,7 @@ const TRRichTextEditor = ({ onChange,text }: { onChange: any,text:string }) => {
           </button>
         ))}
       </div>
-
+      <Divider/>
       {/* Editor */}
       <div className="p-2 justify-between min-h-14">
         <Editor

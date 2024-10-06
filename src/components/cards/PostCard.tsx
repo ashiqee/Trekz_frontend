@@ -24,6 +24,7 @@ import {
   useUpvotePost,
 } from "@/hooks/posts.hook";
 import { useUser } from "@/context/user.provider";
+import PremiumPostOverLay from "./cardsComp/PremiumpostOverlay";
 
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();
@@ -101,13 +102,16 @@ const PostCard = ({ post }: { post: any }) => {
                 <Globe size={11} /> published: {post?.createdAt?.slice(0, 10)} | {post?.createdAt?.slice(11,16)} {post?.createdAt?.slice(11,13) >= 12 ? "PM":"AM"}
               </small>
             </div>
-
-            <PostActionDropDown setIsDeleteOpen={setIsDeleteOpen} setIsModalOpen={setIsOpen} />
+{
+  user?._id === post.user._id && <PostActionDropDown setIsDeleteOpen={setIsDeleteOpen} setIsModalOpen={setIsOpen} />
+}
+            
           </div>
         </div>
 
         {/* post main body  */}
-        <section className="space-y-2 py-2">
+        {
+          post.isPremium && !user?.isVerified ? <PremiumPostOverLay image={post.images[0]}/> : <section className="space-y-2 py-2">
           {/* if text post available show  */}
           {/* todo condition  */}
           <div dangerouslySetInnerHTML={{ __html: post.postContent }} />
@@ -185,6 +189,7 @@ const PostCard = ({ post }: { post: any }) => {
             </div>
           </div>
         </section>
+        }
       </div>
     </div>
     }

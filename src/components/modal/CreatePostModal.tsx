@@ -11,6 +11,8 @@ import {
   Input,
   Divider,
   Image,
+  Checkbox,
+  Tooltip,
 } from "@nextui-org/react";
 import { Camera, Images, Smile, X } from "lucide-react";
 import draftToHtml from "draftjs-to-html";
@@ -25,16 +27,19 @@ import { useCreatePosts } from "@/hooks/posts.hook";
 const CreateNewPostModal = () => {
   const router = useRouter();
   const { user } = useUser();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [editorContent, setEditorContent] = useState("");
+
+
 
   const { mutate: handleCreatePost, isPending, isSuccess } = useCreatePosts();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  const [editorContent, setEditorContent] = useState("");
   const [images, setImages] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const [videoId, setVideoId] = useState("");
   const [tags, setTags] = useState<string[] | []>([]);
   const [category, setCategory] = useState("");
+  const [isPremium,setPremiumPost]=useState(false)
 
   const handleTags = (data: string) => {
     const splitData = data?.split(",");
@@ -80,6 +85,7 @@ const CreateNewPostModal = () => {
       video: videoId,
       tags: tags,
       category: category,
+      isPremium:isPremium
     };
 
     formData.append("data", JSON.stringify(postDetails));
@@ -108,6 +114,9 @@ const CreateNewPostModal = () => {
       return updatedPreviews;
     });
   };
+
+
+  
 
   return (
     <>
@@ -151,7 +160,22 @@ const CreateNewPostModal = () => {
               </ModalHeader>
               <ModalBody>
                 <div className="bg-slate-300/5 p-4 min-h-40 rounded-md">
-                  <TRRichTextEditor onChange={handleEditorChange} />
+
+{
+  user?.isVerified && <div className="flex mb-4 justify-end w-full">
+  <Checkbox  defaultSelected={isPremium} onClick={()=>setPremiumPost(!isPremium)}> 
+    <Tooltip content="Set this post is premium">  
+      Premium Post
+    </Tooltip>
+      
+      </Checkbox>
+  </div>
+}
+    <Divider/>
+
+            
+
+                  <TRRichTextEditor text="" onChange={handleEditorChange} />
                   <form>
                     <Input
                       className="my-1.5 "
@@ -163,7 +187,7 @@ const CreateNewPostModal = () => {
                       className="w-full   bg-slate-600/20 hover:bg-slate-900/85  p-2 rounded-lg mb-4"
                       onChange={(e) => handleCategory(e.target.value)}
                     >
-                      <option value={"category"} disabled selected>
+                      <option disabled selected value={"category"}>
                         Select category
                       </option>
                       <option value="destinations">Destinations</option>

@@ -17,6 +17,7 @@ import TRRichTextEditor from "../forms/TRRichTextEditor";
 import { useUser } from "@/context/user.provider";
 import { useCreatePosts, useUpdatePost } from "@/hooks/posts.hook";
 import PostsSkeleton from "../skeletons/PostsSkeleton";
+import { toast } from "sonner";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EditPostModal = ({
@@ -96,7 +97,10 @@ const EditPostModal = ({
     }
 
     
-    handleUpdatePost(formData);
+   handleUpdatePost(formData);
+
+
+    
   };
 
  

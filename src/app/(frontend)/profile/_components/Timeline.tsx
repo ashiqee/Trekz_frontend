@@ -4,8 +4,10 @@ import CreateNewPostModal from "@/components/modal/CreatePostModal";
 
 
 
-const Timeline = ({datas}:{datas:any}) => {
+const Timeline = async({datas}:{datas:any}) => {
+
    
+    
 
     return (
         <div className="space-y-4   ">

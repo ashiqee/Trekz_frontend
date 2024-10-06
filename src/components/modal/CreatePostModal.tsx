@@ -12,7 +12,7 @@ import {
   Divider,
   Image,
 } from "@nextui-org/react";
-import { Camera, Images, Smile } from "lucide-react";
+import { Camera, Images, Smile, X } from "lucide-react";
 import draftToHtml from "draftjs-to-html";
 import { convertToRaw } from "draft-js";
 import { useRouter } from "next/navigation";
@@ -34,25 +34,19 @@ const CreateNewPostModal = () => {
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const [videoId, setVideoId] = useState("");
   const [tags, setTags] = useState<string[] | []>([]);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
 
-  
-
-  const handleTags = (data:string) => {
+  const handleTags = (data: string) => {
     const splitData = data?.split(",");
 
     const tagsData = splitData.filter((i: string) => i !== "");
-  
+
     setTags(tagsData);
   };
 
-
- 
-  const handleCategory =(data:string)=>{
-
-    setCategory(data)
-
-  }
+  const handleCategory = (data: string) => {
+    setCategory(data);
+  };
 
   const handleEditorChange = (editorState: any) => {
     const contentState = editorState.getCurrentContent();
@@ -80,15 +74,12 @@ const CreateNewPostModal = () => {
   const handleSubmitPost = async () => {
     const formData = new FormData();
 
-
-   
-    
     const postDetails = {
       user: user!._id,
       postContent: editorContent,
       video: videoId,
       tags: tags,
-      category:category
+      category: category,
     };
 
     formData.append("data", JSON.stringify(postDetails));
@@ -106,6 +97,16 @@ const CreateNewPostModal = () => {
     } else {
       router.push("/login");
     }
+  };
+
+  const handleRemoveImg = (i: number) => {
+    setImagePreviews((prevPreviews) => {
+      const updatedPreviews = [...prevPreviews];
+
+      updatedPreviews.splice(i, 1);
+
+      return updatedPreviews;
+    });
   };
 
   return (
@@ -158,7 +159,10 @@ const CreateNewPostModal = () => {
                       onChange={(e) => handleTags(e.target.value)}
                     />
 
-                    <select className="w-full   bg-slate-600/20 hover:bg-slate-900/85  p-2 rounded-lg mb-4" onChange={(e)=>handleCategory(e.target.value)}>
+                    <select
+                      className="w-full   bg-slate-600/20 hover:bg-slate-900/85  p-2 rounded-lg mb-4"
+                      onChange={(e) => handleCategory(e.target.value)}
+                    >
                       <option value={"category"} disabled selected>
                         Select category
                       </option>
@@ -182,7 +186,15 @@ const CreateNewPostModal = () => {
                       {" "}
                       <div className=" grid gap-2 items-center grid-cols-2">
                         {imagePreviews?.map((img, i) => (
-                          <Image key={i} alt="pre" src={img} />
+                          <div key={i} className="relative">
+                            <Image alt="pre" src={img} />
+                            <button
+                              className="absolute hover:bg-slate-500/45 p-2 rounded-full text-black z-50 right-2 top-2"
+                              onClick={() => handleRemoveImg(i)}
+                            >
+                              <X />
+                            </button>
+                          </div>
                         ))}
                       </div>
                       <label

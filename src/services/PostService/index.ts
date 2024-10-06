@@ -31,6 +31,30 @@ export const createAPost = async (formData: FieldValues) => {
   }
 };
 
+
+// edit a post 
+export const editAPost = async (formData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.put<any>(
+      "/posts/create-post",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    revalidateTag("posts");
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+
+// all post get 
 export const getAllPosts = async (query:Record<string,any>) => {
   let fetchOptions = {};
 

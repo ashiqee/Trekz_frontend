@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, Divider, Tooltip } from "@nextui-org/react";
 import { Globe, ThumbsDown, ThumbsUp, Verified } from "lucide-react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import TRForm from "../forms/TRFrom";
 import TRInput from "../forms/TRInput";
 import CommentSkeleton from "../skeletons/CommentSkeleton";
+import PostsSkeleton from "../skeletons/PostsSkeleton";
+import EditPostModal from "../modal/EditPostModal";
 
 import PostActionDropDown from "./cardsComp/PostActionDropDown";
 import VideoCard from "./cardsComp/VideoCard";
@@ -21,7 +23,6 @@ import {
   useUpvotePost,
 } from "@/hooks/posts.hook";
 import { useUser } from "@/context/user.provider";
-import PostsSkeleton from "../skeletons/PostsSkeleton";
 
 const PostCard = ({ post }: { post: any }) => {
   const router = useRouter();
@@ -35,6 +36,8 @@ const PostCard = ({ post }: { post: any }) => {
   const { mutate: handleDownvoteToDb } = useDownvotePost();
 
   const { user } = useUser();
+
+  const [isOpenModal,setIsOpen]= useState(false)
 
   const handleUpvote = () => {
     handleUpvoteToDb(post._id);
@@ -97,7 +100,7 @@ const PostCard = ({ post }: { post: any }) => {
               </small>
             </div>
 
-            <PostActionDropDown />
+            <PostActionDropDown postDetails={post} setIsModalOpen={setIsOpen} />
           </div>
         </div>
 
@@ -125,7 +128,7 @@ const PostCard = ({ post }: { post: any }) => {
               <VideoCard catergory={post?.category} video={post?.video} />
             ) : (
               <>
-                <ImageCard postId={post._id} catergory={post?.category} images={post?.images} />
+                <ImageCard catergory={post?.category} images={post?.images} postId={post._id} />
                 {/* <ImageGallery images={images} /> */}
               </>
             )}
@@ -183,6 +186,7 @@ const PostCard = ({ post }: { post: any }) => {
       </div>
     </div>
     }
+    {isOpenModal && <EditPostModal postDetails={post} setIsOpen={setIsOpen} />}
     </>
   );
 };

@@ -7,14 +7,15 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Delete, Edit, Ellipsis } from 'lucide-react';
+import EditPostModal from '@/components/modal/EditPostModal';
 
-const PostActionDropDown = () => {
+const PostActionDropDown = ({postDetails,setIsModalOpen}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Dropdown
       isOpen={isOpen}
-      onOpenChange={(open) => setIsOpen(open)} // Handle opening/closing from other triggers as well
+      onOpenChange={(open) => setIsOpen(open)} 
     >
       <DropdownTrigger
         onMouseEnter={() => setIsOpen(true)}
@@ -26,15 +27,16 @@ const PostActionDropDown = () => {
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Post Actions"
-        onMouseEnter={() => setIsOpen(true)}  // Keep the dropdown open while hovering over it
-        onMouseLeave={() => setIsOpen(false)} // Close the dropdown when the mouse leaves
+        onMouseEnter={() => setIsOpen(true)} 
+        // onMouseLeave={() => setIsOpen(false)} 
       >
          <DropdownItem
             key="edit"
             description="Allows you to edit the file"
              startContent={<Edit  />}
+             onClick={()=>setIsModalOpen(true)}
           >
-            Edit file
+        Edit
           </DropdownItem>
         <DropdownItem
           key="delete"

@@ -5,17 +5,23 @@ import {
   EditorState,
   Modifier,
   RichUtils,
-  convertToRaw,
+  ContentState, 
+  convertFromHTML,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { Italic, Bold, Underline, Strikethrough, Smile } from "lucide-react";
 import { useRef, useState } from "react";
-import draftToHtml from "draftjs-to-html";
 
-const TRRichTextEditor = ({ onChange }: { onChange: any }) => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
+const TRRichTextEditor = ({ onChange,text }: { onChange: any,text:string }) => {
+  const [editorState, setEditorState] = useState(() => {
+    const blocksFromHTML = convertFromHTML(text);
+    const contentState = ContentState.createFromBlockArray(
+      blocksFromHTML.contentBlocks,
+      blocksFromHTML.entityMap
+    );
+
+    return EditorState.createWithContent(contentState);
+  });
 
   const [isOpenEmoji, setOpenEmoji] = useState(false);
 
@@ -100,6 +106,7 @@ const TRRichTextEditor = ({ onChange }: { onChange: any }) => {
       <div className="p-2 justify-between min-h-14">
         <Editor
           ref={editor}
+          
           editorState={editorState}
           placeholder="Write something!"
           onChange={handleChange}
@@ -119,7 +126,7 @@ const TRRichTextEditor = ({ onChange }: { onChange: any }) => {
             {emojiList.map((emoji, index) => (
               <button
                 key={index}
-                className="hover:bg-slate-200 rounded p-1"
+                className="hover:bg-slate-200 rounded p-1 "
                 onClick={() => {
                   insertEmoji(emoji);
                 }}

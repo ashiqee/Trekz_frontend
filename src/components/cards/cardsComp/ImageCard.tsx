@@ -5,6 +5,7 @@ import React from 'react';
 const ImageCard = ({images,catergory,postId}:{images:string[],catergory:string,postId:string}) => {
 
   
+  
     return (
         <div   className={` mt-2 gap-1.5 relative   grid place-items-center ${images.length === 1 ? "grid-cols-1" : "grid-cols-2"} `}
       >

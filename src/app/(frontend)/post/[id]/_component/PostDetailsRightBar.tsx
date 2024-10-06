@@ -4,11 +4,15 @@ import DeletePostModal from "@/components/modal/DeletePostModal";
 import EditPostModal from "@/components/modal/EditPostModal";
 import { IPost } from "@/types";
 import { Avatar, Tooltip } from "@nextui-org/react";
-import { Globe, Verified } from "lucide-react";
+import { Globe, Verified, X } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 const PostDetailsRightBar = ({ post }:{post:any}) => {
+    const searchParams = useSearchParams(); 
+  const router = useRouter();
+  const redirect = searchParams.get("redirect");
   const [limitCon, setLimitContent] = useState(182);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpenModal,setIsOpen]= useState(false)
@@ -22,6 +26,17 @@ const PostDetailsRightBar = ({ post }:{post:any}) => {
     }
     setIsExpanded(!isExpanded);
   };
+
+  const handleBack =()=>{
+
+   
+    
+    if (redirect) {
+        router.push(redirect); 
+      }else{
+        router.back()
+      }
+  }
 
   return (
     <div>
@@ -56,7 +71,11 @@ const PostDetailsRightBar = ({ post }:{post:any}) => {
               </small>
             </div>
 
+            <div className="flex gap-4">
             <PostActionDropDown setIsDeleteOpen={setIsDeleteOpen} setIsModalOpen={setIsOpen} />
+
+<button className="hover:bg-slate-700/45 p-2 rounded-full" onClick={handleBack} ><X/></button>
+            </div>
           </div>
         </div>
      

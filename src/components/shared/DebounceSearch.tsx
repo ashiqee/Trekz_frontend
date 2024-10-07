@@ -24,7 +24,7 @@ const DebounceSearch = () => {
     
 
    const postsData = data?.data;
-    console.log(postsData);
+   
     
 const searchTerm = useDebounce(watch('search'))
 

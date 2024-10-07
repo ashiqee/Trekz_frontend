@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-import { createAComment, createAPost, downVotetodB, updateAPost, upVotetodB } from "@/services/PostService";
+import { createAComment, createAPost, downVotetodB, getAllPosts, updateAPost, upVotetodB } from "@/services/PostService";
 import { IPost } from "@/types";
 
 
@@ -20,6 +20,8 @@ export const useCreatePosts =()=>{
     })
 };
 
+
+
 export const useUpdatePost =()=>{
     return useMutation<any,Error,FieldValues>({
         mutationKey: ['post'],
@@ -33,6 +35,16 @@ export const useUpdatePost =()=>{
         }
     })
 };
+
+
+// get all post 
+
+export const useGetAllPost = ()=>{
+    return useMutation({
+        mutationKey:["post"],
+        mutationFn: async (query: Record<any,any>)=> await getAllPosts(query)
+    });
+}
 
 export const useUpvotePost =()=>{
     return useMutation<any,Error,FieldValues>({

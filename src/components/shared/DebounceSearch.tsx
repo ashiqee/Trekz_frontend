@@ -3,17 +3,30 @@ import { Input } from '@nextui-org/input';
 import React, { useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
+import SearchPostModal from '../modal/SearchModal';
+
 import {
     SearchIcon,
    
   } from "@/components/icons";
 import useDebounce from '@/hooks/debounce.hook';
 import { useSearchItems } from '@/hooks/search.hook';
-import { ISearchResult } from '@/types';
-import SearchPostModal from '../modal/SearchModal';
 
 
 
+interface ISPost {
+    _id: string;
+    postContent: string;
+    image?: string; 
+    categories?: string;
+    tags: string[];
+  }
+  
+  interface ISearchResult {
+    success: boolean;
+    message: string;
+    data: ISPost[];
+  }
 
 
 
@@ -23,7 +36,10 @@ const DebounceSearch = () => {
     const [ searchResult,setSearchResult]=useState<ISearchResult[]|[]>([])
     
 
-   const postsData = data?.data;
+    const postsData = (data as ISearchResult)?.data || [];
+
+   
+   
    
     
 const searchTerm = useDebounce(watch('search'))
@@ -45,7 +61,7 @@ const searchTerm = useDebounce(watch('search'))
         }
 
         if(!isPending && isSuccess && data && searchTerm){
-            setSearchResult(postsData ?? [])
+            setSearchResult(postsData as any)
         }
     },[isPending,isSuccess,data,searchTerm])
 
@@ -69,7 +85,7 @@ const searchTerm = useDebounce(watch('search'))
     />
     </form>
 
-{searchResult.length>0 && <SearchPostModal reset={reset} postData={postsData} setIsOpen={setSearchResult}/>}
+{searchResult.length>0 && <SearchPostModal postData={postsData} reset={reset} setIsOpen={setSearchResult}/>}
         </div>
     );
 };

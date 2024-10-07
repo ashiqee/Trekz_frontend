@@ -65,7 +65,7 @@ const CommentSection = ({post}:{post:any}) => {
 
           {post.comments?.map((cmt: any) => (
             <div key={cmt._id} className="my-4 flex  gap-1.5">
-              <Avatar size="sm" src={cmt.user.profilePhoto} />
+              <Avatar size="sm" src={cmt?.user?.profilePhoto} />
               <div className="flex items-center gap-2">
                 <div>
                   <div className="bg-slate-400/45 w-fit px-2 rounded-xl">

@@ -1,10 +1,10 @@
 'use server'
 
 import { revalidateTag } from "next/cache";
+
 import { getCurrentUser } from "../AuthService";
 
 import nexiosInstance from "@/config/naxios.config";
-import axiosInstance from "@/lib/AxiosInstance";
 
 
 export const addFollowing = async (followId:string) => {

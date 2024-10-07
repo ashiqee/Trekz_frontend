@@ -1,13 +1,14 @@
 
 'use client'
+import { Suspense, useState } from "react";
+
 import PostCard from "@/components/cards/PostCard";
 import CreateNewPostModal from "@/components/modal/CreatePostModal";
 import Filtering from "@/components/modules/post-filtering/Filtering";
-import { useState } from "react";
 
 
 
-const Timeline = async({datas}:{datas:any}) => {
+const Timeline = ({datas}:{datas:any}) => {
     const [postsData, setPostsData]=useState(datas)
 
    
@@ -18,28 +19,27 @@ const Timeline = async({datas}:{datas:any}) => {
     ));
     
     return (
-        <div className="space-y-4   ">
-            <div className=" p-4 bg-sky-900/25 dark:bg-slate-800/45 rounded-md">
+        <div className="space-y-4  ">
+            <div className=" p-4 bg-sky-900/25   dark:bg-slate-800/45 rounded-md">
             <CreateNewPostModal  />
 
             </div>
 
             <div>
                 <Filtering 
-                setPostsData={setPostsData}
                 categories={categories}
+                setPostsData={setPostsData}
                 
                 />
             </div>
 
-           <div className="grid grid-cols-1 gap-4">
-            {
-                postsData?.map((item:any,i:number)=>(
-
-                    <PostCard  key={i} post={item}/>
-                ))
-            }
-           </div>
+            <Suspense fallback={<div>Loading posts...</div>}>
+                <div className="grid grid-cols-1 gap-4">
+                    {postsData?.map((item: any, i: number) => (
+                        <PostCard key={i} post={item} />
+                    ))}
+                </div>
+            </Suspense>
         </div>
     );
 };

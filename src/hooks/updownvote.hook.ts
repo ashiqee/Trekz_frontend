@@ -1,15 +1,16 @@
+import { downVotetodB, upVotetodB } from "@/services/PostService";
 import {  useMutation,  } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { addFollowing, removeFollowing } from "@/services/FollowService";
 
 
-export const useAddFollow =()=>{
+
+export const useAddUpVote =()=>{
   
 
     return useMutation<any,Error,string>({
-        mutationKey: ['user'],
-        mutationFn: async (followId:string)=> await addFollowing(followId),
+        mutationKey: ['post'],
+        mutationFn: async (postId:string)=> await upVotetodB(postId),
         onSuccess:(res)=>{
                      
             toast.success(res.message);
@@ -21,12 +22,12 @@ export const useAddFollow =()=>{
     })
 };
 
-export const useUnFollow =()=>{
+export const useDownVote =()=>{
   
     
     return useMutation<any,Error,string>({
         mutationKey: ['user'],
-        mutationFn: async (followId:string)=> await removeFollowing(followId),
+        mutationFn: async (postId:string)=> await downVotetodB(postId),
         onSuccess:(res)=>{
                      
             toast.success(res.message);

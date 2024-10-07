@@ -65,7 +65,7 @@ export const updateAPost = async (formData: FieldValues) => {
 
 
 // all post get 
-export const getAllPosts = async (query:Record<string,any>) => {
+export const getAllPosts = async (query:Record<any,any>) => {
   let fetchOptions = {};
 
   fetchOptions = {
@@ -81,6 +81,9 @@ export const getAllPosts = async (query:Record<string,any>) => {
   if (!res.ok) {
     throw new Error('Failed to fetch posts');
   }
+
+ 
+
 
   return res.json();
 };
@@ -109,7 +112,7 @@ export const deletAPost = async (id:Record<string,any>) => {
   if (!data.success) {
     throw new Error('Failed to deleted post');
   }else{
-    revalidateTag("post")
+    revalidateTag("posts")
 
   }
 

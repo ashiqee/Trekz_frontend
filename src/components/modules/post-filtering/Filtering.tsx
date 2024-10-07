@@ -1,114 +1,123 @@
-"use client"
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem, SharedSelection, Tooltip } from "@nextui-org/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FilterIcon } from "lucide-react";
 
 import { useGetAllPost } from "@/hooks/posts.hook";
 
-const Filtering = ({ setPostsData, categories }: { setPostsData: any, categories: any[] }) => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const { mutate: handleGetAllPosts, data, isPending, isSuccess } = useGetAllPost();
-    
-    // State management for filtering and sorting
-    const [selectCategory, setSelectCategory] = useState<string>('');
-    const [sortBy, setSortBy] = useState<string>(''); // Sorting by 'publishDate' by default
-    const [isPremium, setIsPremium] = useState<boolean>(false);   // Toggle for premium posts
+const Filtering = ({
+  setPostsData,
+  categories,
+}: {
+  setPostsData: any;
+  categories: any[];
+}) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const {
+    mutate: handleGetAllPosts,
+    data,
+    isPending,
+    isSuccess,
+  } = useGetAllPost();
 
-    const categoryValue = Array.from(selectCategory)[0];
-    const sortValue = Array.from(sortBy)[0];
-   
+  // State management for filtering and sorting
+  const [selectCategory, setSelectCategory] = useState<string>("");
+  const [sortBy, setSortBy] = useState<string>("");
+  const [isPremium, setIsPremium] = useState<boolean>(false);
 
-    // Trigger fetch when category, sortBy, or isPremium changes
-    useEffect(() => {
-        handleFilteringAndSorting();
-    }, [selectCategory, sortBy, isPremium]);
+  // Trigger fetch when category, sortBy, or isPremium changes
+  useEffect(() => {
+    handleFilteringAndSorting();
+  }, [selectCategory, sortBy, isPremium]);
 
-    // Handle filtering and sorting based on state
-    const handleFilteringAndSorting = () => {
-        const params = new URLSearchParams(searchParams.toString());
+  // Handle filtering and sorting based on state
+  const handleFilteringAndSorting = () => {
+    const params = new URLSearchParams(searchParams.toString());
 
+    if (selectCategory) {
+      params.set("category", selectCategory);
+    }
 
-        if (selectCategory) {
-            params.set("category", categoryValue);
-        }
-    
-        // Set sortBy
-        if (sortBy) {
-            params.set("sortBy", sortValue);
-        }
-    
-        // Set premium filter
-        if (isPremium) {
-            params.set("isPremium", "true");
-        } else {
-            params.delete("isPremium"); // Remove it if false
-        }
-    
+    // Set sortBy
+    if (sortBy) {
+      params.set("sortBy", sortBy);
+    }
 
-        const stringParams= params.toString();
+    // Set premium filter
+    if (isPremium) {
+      params.set("isPremium", "true");
+    } else {
+      params.delete("isPremium");
+    }
 
-        handleGetAllPosts(stringParams);
-    };
+    handleGetAllPosts(params);
+  };
 
-    // Handle category change
-    const handleCategoryChange = (category: string) => {
-        setSelectCategory(category);
-    };
+  // Handle category change
+  const handleCategoryChange = (keys: SharedSelection) => {
+    const selectedCategory = Array.from(keys)[0] as string; 
+    setSelectCategory(selectedCategory || ""); 
+  };
 
-    // Handle sort change
-    const handleSortChange = (sortOption: string) => {
-        setSortBy(sortOption);
-    };
+  // Handle sort change
+  const handleSortChange = (sortOption: SharedSelection) => {
+    const selectedSort = Array.from(sortOption)[0] as string; 
+    setSortBy(selectedSort || "");
+  };
 
-    // Handle premium toggle
-    const togglePremium = () => {
-        setIsPremium(!isPremium);
-    };
+  // Handle premium toggle
+  const togglePremium = () => {
+    setIsPremium(!isPremium);
+  };
 
-    
-    
+  if (isSuccess) {
+    setPostsData(data.data);
+  }
 
-    return (
-        <div>
-            {/* Category Filter */}
-            <Select
-                className="max-w-xs"
-                label="Select a Category"
-                placeholder="Select a Category"
-                selectedKeys={selectCategory}
-                variant="underlined"
-                onSelectionChange={handleCategoryChange}
-            >
-                {categories?.map((name) => (
-                    <SelectItem key={name}>
-                        {name}
-                    </SelectItem>
-                ))}
-            </Select>
+  return (
+    <div className="flex bg-slate-800/45 rounded-lg p-5 gap-4 items-center justify-between">
+      <Tooltip content={"clear filter"}>
+        <button>
+          <FilterIcon />{" "}
+        </button>
+      </Tooltip>
+      {/* Category Filter */}
+      <Select
+        className="max-w-48"
+        aria-label="Select a Category"  // Added aria-label for accessibility
+        placeholder="Select a Category"
+        selectedKeys={selectCategory}
+        variant="faded"
+        onSelectionChange={handleCategoryChange}
+      >
+        {categories?.map((name) => (
+          <SelectItem key={name} value={name}>{name}</SelectItem>
+        ))}
+      </Select>
 
-            {/* Sort Options */}
-            <Select
-                className="max-w-xs mt-4"
-                label="Sort By"
-                placeholder="Sort By"
-                selectedKeys={sortBy}
-                variant="underlined"
-                onSelectionChange={handleSortChange}
-            >
-                <SelectItem key="publishDate">Publish Date</SelectItem>
-                <SelectItem key="upVote">UpVote</SelectItem>
-            </Select>
+      {/* Sort Options */}
+      <Select
+        className="max-w-48"
+        aria-label="Sort By"  // Added aria-label for accessibility
+        placeholder="Sort By"
+        selectedKeys={sortBy}
+        variant="faded"
+        onSelectionChange={handleSortChange}
+      >
+        <SelectItem key="publishDate" value={"publishDate"}>Publish Date</SelectItem>
+        <SelectItem key="upVote" value={"upVote"}>UpVote</SelectItem>
+      </Select>
 
-            {/* Premium Toggle */}
-            <button 
-                className={`mt-4 px-4 py-2 rounded ${isPremium ? 'bg-green-500' : 'bg-gray-300'}`}
-                onClick={togglePremium}
-            >
-                {isPremium ? 'Show All Posts' : 'Show Premium Only'}
-            </button>
-        </div>
-    );
+      {/* Premium Toggle */}
+      <button
+        className={`px-4 py-[07px] rounded-xl ${isPremium ? "bg-blue-500" : "bg-slate-800"}`}
+        onClick={togglePremium}
+      >
+        {isPremium ? "Show All Posts" : "Show Premium"}
+      </button>
+    </div>
+  );
 };
 
 export default Filtering;

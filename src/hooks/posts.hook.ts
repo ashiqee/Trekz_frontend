@@ -37,6 +37,8 @@ export const useUpdatePost =()=>{
 };
 
 
+
+
 // get all post 
 
 export const useGetAllPost = ()=>{
@@ -46,33 +48,33 @@ export const useGetAllPost = ()=>{
     });
 }
 
-export const useUpvotePost =()=>{
-    return useMutation<any,Error,FieldValues>({
-        mutationKey: ['post'],
-        mutationFn: async (postId)=> await upVotetodB(postId),
-        onSuccess:(res)=>{
+// export const useUpvotePost =()=>{
+//     return useMutation<any,Error,FieldValues>({
+//         mutationKey: ['post'],
+//         mutationFn: async (postId)=> await upVotetodB(postId),
+//         onSuccess:(res)=>{
                      
-            toast.success(res.message);
-        },
-        onError:(error)=>{
-            toast.error(error.message)
-        }
-    })
-};
+//             toast.success(res.message);
+//         },
+//         onError:(error)=>{
+//             toast.error(error.message)
+//         }
+//     })
+// };
 
-export const useDownvotePost =()=>{
-    return useMutation<any,Error,FieldValues>({
-        mutationKey: ['post'],
-        mutationFn: async (postId)=> await downVotetodB(postId),
-        onSuccess:(res)=>{
+// export const useDownvotePost =()=>{
+//     return useMutation<any,Error,FieldValues>({
+//         mutationKey: ['post'],
+//         mutationFn: async (postId)=> await downVotetodB(postId),
+//         onSuccess:(res)=>{
                      
-            toast.success(res.message);
-        },
-        onError:(error)=>{
-            toast.error(error.message)
-        }
-    })
-};
+//             toast.success(res.message);
+//         },
+//         onError:(error)=>{
+//             toast.error(error.message)
+//         }
+//     })
+// };
 
 
 // comment hook 

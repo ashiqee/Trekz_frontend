@@ -5,9 +5,12 @@ import React, { ReactNode, useState } from "react";
 
 import { siteConfig } from "@/config/site";
 import { logout } from "@/services/AuthService";
+import { useUser } from "@/context/user.provider";
+import { LucideLayoutDashboard } from "lucide-react";
 
 const MenuCard = ({ icon }: { icon: ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const{ user}= useUser()
 
   return (
     <>
@@ -21,6 +24,19 @@ const MenuCard = ({ icon }: { icon: ReactNode }) => {
         >
           <div className="">
             <div className="grid justify-center items-center  p-4 grid-cols-3 gap-2">
+            {user?.role === "ADMIN" && <>
+              
+              {siteConfig.navAdminMenuCardItems.map((item) => (
+              <Link
+                key={item.label}
+                className="data-[active=true]:text-primary text-center flex flex-col items-center justify-center p-2 bg-slate-500/25 hover:bg-slate-500/40 rounded-lg data-[active=true]:font-medium mt-1.5"
+                href={item.href}
+              >
+                {item.icon}
+                <small className="text-[10px]">{item.label}</small>
+              </Link>
+            ))}
+            </>}
               {siteConfig.navMenuCardItems.map((item) => (
                 <Link
                   key={item.label}
@@ -31,6 +47,7 @@ const MenuCard = ({ icon }: { icon: ReactNode }) => {
                   <small className="text-[10px]">{item.label}</small>
                 </Link>
               ))}
+              
             </div>
             <div className=" p-4">
               <Button

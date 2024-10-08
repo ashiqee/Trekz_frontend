@@ -1,66 +1,57 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { getCurrentUser } from "./services/AuthService";
 
+const authRoutes = ["/login", "/register"];
 
-
-const authRoutes = ["/login",'/register'];
 
 type Role = keyof typeof roleBasedRoutes;
 
-const roleBasedRoutes={
-    ADMIN:[/^\/admin/,/^\/profile/],
-    USER:[/^\/user/,/^\/profile/],
-   
-}
+const roleBasedRoutes = {
+    ADMIN: [/^\/admin/, /^\/profile/],
+    USER: [/^\/user/, /^\/profile/],
+};
 
-export async function middleware(request:NextRequest){
-    const {pathname}= request.nextUrl;
 
+export async function middleware(request: NextRequest) {
+    const { pathname } = request.nextUrl;
+
+    
     const user = await getCurrentUser();
-  
 
-
-    if(!user){
-        if(authRoutes.includes(pathname)){
+    // If the user is not authenticated
+    if (!user) {
+   
+        if (authRoutes.includes(pathname)) {
             return NextResponse.next();
-        }else{
+        } else {
+           
             return NextResponse.redirect(
-                new URL(
-                    pathname ? `/login?redirect=${pathname}`:"/login",
-                    request.url
-                )
+                new URL(`/login?redirect=${pathname}`, request.url)
             );
         }
     }
-    
-    // Role Base Authorization 
 
-    if(user?.role && roleBasedRoutes[user?.role as Role]){
-        const routes = roleBasedRoutes[user?.role as Role];
+    // Role-Based Authorization
+    if (user?.role && roleBasedRoutes[user.role as Role]) {
+        const allowedRoutes = roleBasedRoutes[user.role as Role];
 
-        if(routes.some((route)=>pathname.match(route))){
-            return NextResponse.next();
+        
+        if (allowedRoutes.some((route) => route.test(pathname))) {
+            return NextResponse.next(); // Allow access
         }
     }
 
-    return NextResponse.redirect(new URL('/',request.url));
-
-
+   
+    return NextResponse.redirect(new URL("/", request.url));
 }
 
 
-
-
-
-export const config ={
-
-    matcher :[
-        '/login',
-        '/register',
-        "/profile/:page",
-        '/admin/:page',
-        '/user/:page',
-        
-    ]
-}
+export const config = {
+    matcher: [
+        "/login",
+        "/register",
+        "/profile/:path*",   
+        "/admin/:path*",     
+        "/user/:path*",      
+    ],
+};

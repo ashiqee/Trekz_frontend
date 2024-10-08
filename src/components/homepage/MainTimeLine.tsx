@@ -14,7 +14,7 @@ interface QueryState {
   isPremium?: boolean;
 }
 
-const MainTimeline = () => {
+const MainTimeline = ({postSData}:{postSData:any}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -121,7 +121,7 @@ const MainTimeline = () => {
       ) : (
         <>
           {postDatas.length > 0 ? (
-            <Timeline datas={postDatas} />
+            <Timeline datas={postDatas ? postDatas : postSData} />
           ) : (
             "Not Available Post"
           )}

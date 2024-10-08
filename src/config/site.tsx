@@ -1,5 +1,5 @@
 export type SiteConfig = typeof siteConfig;
-import { Contact, HelpCircleIcon, Info, Settings, User, Verified } from "lucide-react";
+import { Banknote, Contact, HelpCircleIcon, Info, LucideLayoutDashboard, Settings, User, Users, Verified } from "lucide-react";
 import { FaGlobe, FaAd, FaHeadset, FaCheckCircle, FaRocket, FaBook, FaUserCog, FaChartLine, FaHandsHelping, FaLock, FaCalendarAlt, FaNetworkWired, FaShieldAlt, FaUsers, FaStar } from 'react-icons/fa';
 
 export const siteConfig = {
@@ -15,12 +15,12 @@ export const siteConfig = {
     {
       label: "About",
       icon: <Info size={20} />,
-      href: "/profile",
+      href: "/about",
     },
     {
       label: "Contact us",
       icon: <Contact size={20} />,
-      href: "/profile",
+      href: "/contact",
     },
     {
       label: "Profile Verify",
@@ -30,13 +30,32 @@ export const siteConfig = {
     {
       label: "Setting",
       icon: <Settings size={20} />,
-      href: "/profile-verfication",
+      href: "/profile/password-security",
     },
     {
       label: "Help",
       icon: <HelpCircleIcon size={20} />,
-      href: "/profile-verfication",
+      href: "#",
     },
+    
+  ],
+  navAdminMenuCardItems: [
+    {
+      label: "Dashboard",
+      icon: <LucideLayoutDashboard size={20}/>,
+      href: "/admin/dashboard",
+    },
+    {
+      label: "User Manage",
+      icon: <Users size={20}/>,
+      href: "/admin/user",
+    },
+    {
+      label: "Payment Mange",
+      icon: <Banknote  size={20}/>,
+      href: "/admin/dashboard",
+    },
+   
     
   ],
 

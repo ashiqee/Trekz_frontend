@@ -35,16 +35,16 @@ export default function NavbarDropdown() {
   };
 
   return (
-    <Dropdown>
+    <Dropdown className="flex flex-col items-center">
       <DropdownTrigger>
         <Avatar className="cursor-pointer" src={user?.profilePhoto} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem onClick={() => handleNavigation("/profile")}>
-          Profile
+          {user?.name}
         </DropdownItem>
-        <DropdownItem onClick={() => handleNavigation(`/profile/password-security`)}>
-          password and security
+        <DropdownItem>
+          {user?.email}
         </DropdownItem>
         <DropdownItem
           key="delete"

@@ -2,11 +2,16 @@
 
 import MainTimeLine from "@/components/homepage/MainTimeLine";
 import CreateNewPostModal from "@/components/modal/CreatePostModal";
+import { getAllPosts } from "@/services/PostService";
 
 export default async function Home() {
- 
- 
+ let query={
+  limit:20
+ }
+ const {data:postDataSrver} = await getAllPosts(query)
 
+ 
+ 
 
   return (
     <section className="flex max-w-7xl mx-auto gap-4 py-8 md:py-10">
@@ -16,7 +21,7 @@ export default async function Home() {
             <CreateNewPostModal  />
 
             </div>
-            <MainTimeLine/>
+            <MainTimeLine postSData={postDataSrver}/>
       </div>
      
       <div className="hidden md:block">Right Bar</div>

@@ -66,10 +66,10 @@ export const updateAPost = async (formData: FieldValues) => {
 
 // all post get 
 export const getAllPosts = async (query:Record<any,any>) => {
-  let fetchOptions = {};
-
-  fetchOptions = {
-    cache: "no-store",
+  const fetchOptions = {
+    next: {
+      tags: ["posts"],
+    },
   };
   const queryString = new URLSearchParams(query).toString()
 
@@ -81,6 +81,8 @@ export const getAllPosts = async (query:Record<any,any>) => {
   if (!res.ok) {
     throw new Error('Failed to fetch posts');
   }
+
+
 
  
 
@@ -163,7 +165,10 @@ export const upVotetodB = async (postId: any) => {
       
     });
 
-    revalidateTag('posts')
+    if(data){
+
+      revalidateTag('posts')
+    }
 
     return data;
   } catch (error: any) {
@@ -189,7 +194,10 @@ export const downVotetodB = async (postId: any) => {
       
     });
 
-    revalidateTag('posts')
+    if(data){
+
+      revalidateTag('posts')
+    }
 
     return data;
   } catch (error: any) {

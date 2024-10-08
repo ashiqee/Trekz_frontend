@@ -3,23 +3,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FilterIcon } from "lucide-react";
 
-import { useGetAllPost } from "@/hooks/posts.hook";
+
 
 const Filtering = ({
-  setPostsData,
-  categories,
+    categories,
 }: {
-  setPostsData: any;
+
   categories: any[];
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const {
-    mutate: handleGetAllPosts,
-    data,
-    isPending,
-    isSuccess,
-  } = useGetAllPost();
+ 
 
   // State management for filtering and sorting
   const [selectCategory, setSelectCategory] = useState<string>("");
@@ -51,18 +45,20 @@ const Filtering = ({
       params.delete("isPremium");
     }
 
-    handleGetAllPosts(params);
+    router.push(`?${params.toString()}`);
   };
 
   // Handle category change
   const handleCategoryChange = (keys: SharedSelection) => {
-    const selectedCategory = Array.from(keys)[0] as string; 
+    const selectedCategory = Array.from(keys)[0] as string;
+ 
     setSelectCategory(selectedCategory || ""); 
   };
 
   // Handle sort change
   const handleSortChange = (sortOption: SharedSelection) => {
-    const selectedSort = Array.from(sortOption)[0] as string; 
+    const selectedSort = Array.from(sortOption)[0] as string;
+ 
     setSortBy(selectedSort || "");
   };
 
@@ -71,9 +67,7 @@ const Filtering = ({
     setIsPremium(!isPremium);
   };
 
-  if (isSuccess) {
-    setPostsData(data.data);
-  }
+ 
 
   return (
     <div className="flex bg-slate-800/45 rounded-lg p-5 gap-4 items-center justify-between">
@@ -84,8 +78,8 @@ const Filtering = ({
       </Tooltip>
       {/* Category Filter */}
       <Select
-        className="max-w-48"
         aria-label="Select a Category"  // Added aria-label for accessibility
+        className="max-w-48"
         placeholder="Select a Category"
         selectedKeys={selectCategory}
         variant="faded"
@@ -98,8 +92,8 @@ const Filtering = ({
 
       {/* Sort Options */}
       <Select
-        className="max-w-48"
         aria-label="Sort By"  // Added aria-label for accessibility
+        className="max-w-48"
         placeholder="Sort By"
         selectedKeys={sortBy}
         variant="faded"

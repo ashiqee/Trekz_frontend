@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Divider, Tooltip } from "@nextui-org/react";
 import { Globe, Verified } from "lucide-react";
 import { FieldValues, useForm } from "react-hook-form";

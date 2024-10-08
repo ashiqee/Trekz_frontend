@@ -8,7 +8,7 @@ import { IPost } from "@/types";
 
 export const useCreatePosts =()=>{
     return useMutation<any,Error,FieldValues>({
-        mutationKey: ['post'],
+        mutationKey: ['posts'],
         mutationFn: async (postData)=> await createAPost(postData),
         onSuccess:(res)=>{
                      
@@ -24,7 +24,7 @@ export const useCreatePosts =()=>{
 
 export const useUpdatePost =()=>{
     return useMutation<any,Error,FieldValues>({
-        mutationKey: ['post'],
+        mutationKey: ['posts'],
         mutationFn: async (postData)=> await updateAPost(postData),
         onSuccess:(res)=>{
                      
@@ -43,7 +43,7 @@ export const useUpdatePost =()=>{
 
 export const useGetAllPost = ()=>{
     return useMutation({
-        mutationKey:["post"],
+        mutationKey:["posts"],
         mutationFn: async (query: Record<any,any>)=> await getAllPosts(query)
     });
 }
@@ -82,7 +82,7 @@ export const useGetAllPost = ()=>{
 
 export const useCreateComment =()=>{
     return useMutation<any,Error,FieldValues>({
-        mutationKey: ['post'],
+        mutationKey: ['posts'],
         mutationFn: async (commentData)=> await createAComment(commentData),
         onSuccess:(res)=>{
                      

@@ -1,13 +1,20 @@
 
+
+import { useGetAllPost } from "@/hooks/posts.hook";
 import Timeline from "./profile/_components/Timeline";
+
 import { getAllPosts } from "@/services/PostService";
 
 export default async function Home() {
+ 
   let query = {
     limit: 20,
   };
 
   const { data: posts } = await getAllPosts(query);
+
+console.log(posts?.slice(0,1));
+
 
   return (
     <section className="flex max-w-7xl mx-auto gap-4 py-8 md:py-10">

@@ -3,12 +3,9 @@ import React from "react";
 import { Card, CardHeader, CardBody, Image, Button, Spinner, Tooltip } from "@nextui-org/react";
 import Link from "next/link";
 import { Star, Verified } from "lucide-react";
-import { addFollowing, removeFollowing } from "@/services/FollowService";
-import { getCurrentUser } from "@/services/AuthService";
-import { toast } from "sonner";
-import FollowAction from "./FollowAction";
+
+
 import { useAddFollow, useUnFollow } from "@/hooks/follow.hoot";
-import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
 
 
 interface Ifollow {

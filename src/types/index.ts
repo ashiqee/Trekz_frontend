@@ -55,3 +55,11 @@ export interface ISearchResult {
   images: string;
   _id: string;
 }
+
+export interface ICategories {
+  categories: string[];
+}
+
+export interface CategoriesResponse {
+  data: ICategories;
+}

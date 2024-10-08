@@ -1,29 +1,32 @@
 'use client'
+import { Avatar, Divider } from '@nextui-org/react';
+import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import React from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
+
 import CmntActionDropDown from '@/components/cards/cardsComp/CommentActDrop';
 import TRForm from '@/components/forms/TRFrom';
 import TRInput from '@/components/forms/TRInput';
 import CommentSkeleton from '@/components/skeletons/CommentSkeleton';
 import { useUser } from '@/context/user.provider';
-import { useCreateComment, useDownvotePost, useUpvotePost } from '@/hooks/posts.hook';
-import { Avatar, Divider } from '@nextui-org/react';
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useCreateComment, useGetAllPost,   } from '@/hooks/posts.hook';
+import { useAddUpVote, useDownVote } from '@/hooks/updownvote.hook';
 
 const CommentSection = ({post}:{post:any}) => {
     const { user } = useUser();
     const { reset } = useForm();
-    const { mutate: handleUpvoteToDb, isPending, isSuccess } = useUpvotePost();
+    const { mutate: handleUpvoteToDb, isPending, isSuccess,  } = useAddUpVote();
+    
     const {
       mutate: handleCommentToDb,
       isPending: isComPending,
       isSuccess: isComSuccess,
     } = useCreateComment();
-    const { mutate: handleDownvoteToDb } = useDownvotePost();
+    const { mutate: handleDownvoteToDb } = useDownVote();
 
     const handleUpvote = () => {
         handleUpvoteToDb(post._id);
+        
       };
       const handleDownvote = () => {
         handleDownvoteToDb(post._id);

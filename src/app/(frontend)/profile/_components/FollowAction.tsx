@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@nextui-org/button";
-import { Star, UserMinus, UserMinusIcon } from "lucide-react";
+import { Star, UserMinus } from "lucide-react";
 import React from "react";
 import { Spinner } from "@nextui-org/react";
 

@@ -6,7 +6,7 @@ import nexiosInstance from "@/config/naxios.config"
 
 export const getCategories = async()=>{
     try{
-        const {data}= await nexiosInstance.get('/posts/posts-categories')
+        const {data}= await nexiosInstance.get('/posts/categories')
 
         return data;
     }catch(err:any){

@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import { Verified } from "lucide-react";
+import { Tooltip } from "@nextui-org/react";
 
 import Timeline from "./_components/Timeline";
 import Follow from "./_components/Follow";
 import Followers from "./_components/Follower";
 import AboutMe from "./_components/AboutMe";
-import { Verified } from "lucide-react";
-import { Tooltip } from "@nextui-org/react";
 
 const ProfileMenuTab = ({ userData ,postsData,currentUserIsFollow }: any) => {
   const [isActiveTab, setActiveTab] = useState(0);

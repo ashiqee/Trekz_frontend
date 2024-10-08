@@ -11,14 +11,13 @@ import {
   Input,
   Tooltip,
 } from "@nextui-org/react";
-import { Camera, Edit, ImageUp } from "lucide-react";
+import { Camera, ImageUp } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
+import { toast } from "sonner";
 
-import TRForm from "@/components/forms/TRFrom";
-import TRInput from "@/components/forms/TRInput";
 import { useUser } from "@/context/user.provider";
 import { updateProfile } from "@/services/ProfileService";
-import { toast } from "sonner";
+
 
 const ChangeProfileImage = () => {
   const { user } = useUser();
@@ -69,9 +68,9 @@ const ChangeProfileImage = () => {
     <div>
       <Tooltip content="change profile image">
         <Button
-          size="sm"
           className="absolute  left-24 size-1 bottom-2 z-40 hover:bg-slate-600/45
              bg-slate-700/5"
+          size="sm"
           onPress={onOpen}
         >
           <Camera size={20} />
@@ -88,8 +87,8 @@ const ChangeProfileImage = () => {
               <ModalBody>
                 <div className=" overflow-hidden items-center ">
                   <Image
-                    className="object-cover w-full"
                     alt="profile"
+                    className="object-cover w-full"
                     src={imagePreviews}
                   />
                 </div>

@@ -3,9 +3,9 @@
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
+import { redirect } from "next/navigation";
 
 import nexiosInstance from "@/config/naxios.config";
-import { redirect } from "next/navigation";
 
 // registration part
 

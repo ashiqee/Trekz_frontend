@@ -1,14 +1,12 @@
 
 import React from "react";
 import { Tooltip } from "@nextui-org/tooltip";
-import { link as linkStyles } from "@nextui-org/theme";
-import clsx from "clsx";
-
-import { siteConfig } from "@/config/site";
 import Link from "next/link";
-import MenuCard from "./MenuCard";
 import { Bell, House, LayoutGrid } from "lucide-react";
+
 import NotificationModal from "../modal/NotificationModal";
+
+import MenuCard from "./MenuCard";
 
 const Menubar = () => {
 

@@ -1,7 +1,6 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
 import {
-  useDisclosure,
   Button,
   Input,
   Divider,
@@ -13,11 +12,10 @@ import { convertToRaw } from "draft-js";
 import { useRouter } from "next/navigation";
 
 import TRRichTextEditor from "../forms/TRRichTextEditor";
+import PostsSkeleton from "../skeletons/PostsSkeleton";
 
 import { useUser } from "@/context/user.provider";
-import { useCreatePosts, useUpdatePost } from "@/hooks/posts.hook";
-import PostsSkeleton from "../skeletons/PostsSkeleton";
-import { toast } from "sonner";
+import { useUpdatePost } from "@/hooks/posts.hook";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EditPostModal = ({

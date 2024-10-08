@@ -9,21 +9,19 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import NextLink from "next/link";
 import { Button } from "@nextui-org/button";
 
 import Menubar from "./menubar";
 import NavbarDropdown from "./NavbarDropDown";
+import DebounceSearch from "./DebounceSearch";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
-  SearchIcon,
   Logo,
 } from "@/components/icons";
 import { useUser } from "@/context/user.provider";
-import DebounceSearch from "./DebounceSearch";
 
 const NavbarNew = () => {
     const {user} = useUser()

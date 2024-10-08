@@ -1,8 +1,7 @@
-import { useAddUpVote, useDownVote } from '@/hooks/updownvote.hook';
-import { downVotetodB, upVotetodB } from '@/services/PostService';
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
-import { revalidateTag } from 'next/cache';
 import React from 'react';
+
+import { useAddUpVote, useDownVote } from '@/hooks/updownvote.hook';
 
 const UpDownVote =  ({postId,upvote,downvote}:{postId:string,upvote:number,downvote:number}) => {
     const { mutate: handleUpvoteToDb, isPending: isUpvotePending } = useAddUpVote();

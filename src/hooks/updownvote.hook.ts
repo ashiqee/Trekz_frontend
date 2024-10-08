@@ -1,6 +1,7 @@
-import { downVotetodB, upVotetodB } from "@/services/PostService";
 import {  useMutation,  } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { downVotetodB, upVotetodB } from "@/services/PostService";
 
 
 

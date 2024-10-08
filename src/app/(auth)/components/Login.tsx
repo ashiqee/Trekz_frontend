@@ -5,6 +5,7 @@ import { Button, Card, CardBody, Link } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 import { useUser } from "@/context/user.provider";
 import loginValidation from "@/schemas/login.schema";
@@ -12,7 +13,6 @@ import TRInput from "@/components/forms/TRInput";
 import TRForm from "@/components/forms/TRFrom";
 import { useUserLogin } from "@/hooks/auth.hook";
 import Loading from "@/components/shared/Loading";
-import { toast } from "sonner";
 
 export const dynamic = "force-dynamic";
 

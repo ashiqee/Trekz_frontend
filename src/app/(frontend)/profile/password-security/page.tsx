@@ -3,12 +3,12 @@ import { Button } from "@nextui-org/button";
 import { ArrowLeft, Eye, EyeOff, Key } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 import TRInput from "@/components/forms/TRInput";
 import TRForm from "@/components/forms/TRFrom";
 import { changePassword, logout } from "@/services/AuthService";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import Loading from "@/components/shared/Loading";
 
 
@@ -101,7 +101,7 @@ const PasswordNSecurity = () => {
           >
             {showPassword ? <EyeOff /> : <Eye />} Show password
           </button>
-          <Button type="submit" fullWidth className="my-2" size="sm">
+          <Button fullWidth className="my-2" size="sm" type="submit">
             Reset pasword
           </Button>
         </TRForm>

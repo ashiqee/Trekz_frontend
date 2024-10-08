@@ -1,11 +1,11 @@
 "use client"
-import { ArrowBigRight, ArrowLeft, Key } from 'lucide-react';
+import { ArrowLeft, Key } from 'lucide-react';
 import React from 'react';
+import { Button } from '@nextui-org/button';
+import { Link } from '@nextui-org/link';
 
 import TRForm from '@/components/forms/TRFrom';
 import TRInput from '@/components/forms/TRInput';
-import { Button } from '@nextui-org/button';
-import { Link } from '@nextui-org/link';
 
 
 const ResetPassword = () => {
@@ -25,8 +25,8 @@ const ResetPassword = () => {
 
           </div>
           <TRForm onSubmit={handleSendPassword}>
-            <TRInput size='sm' label='Email' name='email' type='email' />
-            <Button className="my-4"  fullWidth size='sm'>Reset pasword</Button>
+            <TRInput label='Email' name='email' size='sm' type='email' />
+            <Button fullWidth  className="my-4" size='sm'>Reset pasword</Button>
           </TRForm>
 
           <Link href={"/login"}><ArrowLeft/>Back to login in</Link>

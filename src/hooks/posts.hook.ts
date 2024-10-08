@@ -2,8 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-import { createAComment, createAPost, downVotetodB, getAllPosts, updateAPost, upVotetodB } from "@/services/PostService";
-import { IPost } from "@/types";
+import { createAComment, createAPost, getAllPosts, updateAPost } from "@/services/PostService";
 
 
 export const useCreatePosts =()=>{
@@ -39,43 +38,17 @@ export const useUpdatePost =()=>{
 
 
 
-// get all post 
 
-export const useGetAllPost = ()=>{
+
+  
+export const useGetAllPost = () => {
     return useMutation({
-        mutationKey:["posts"],
-        mutationFn: async (query: Record<any,any>)=> await getAllPosts(query)
+      mutationKey: ['posts'],
+      mutationFn: async (query: Record<string, any>) => {
+        return await getAllPosts(query);
+      },
     });
-}
-
-// export const useUpvotePost =()=>{
-//     return useMutation<any,Error,FieldValues>({
-//         mutationKey: ['post'],
-//         mutationFn: async (postId)=> await upVotetodB(postId),
-//         onSuccess:(res)=>{
-                     
-//             toast.success(res.message);
-//         },
-//         onError:(error)=>{
-//             toast.error(error.message)
-//         }
-//     })
-// };
-
-// export const useDownvotePost =()=>{
-//     return useMutation<any,Error,FieldValues>({
-//         mutationKey: ['post'],
-//         mutationFn: async (postId)=> await downVotetodB(postId),
-//         onSuccess:(res)=>{
-                     
-//             toast.success(res.message);
-//         },
-//         onError:(error)=>{
-//             toast.error(error.message)
-//         }
-//     })
-// };
-
+  };
 
 // comment hook 
 

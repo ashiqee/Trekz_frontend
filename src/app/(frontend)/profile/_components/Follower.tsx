@@ -1,8 +1,7 @@
 import React from "react";
 
 import FollowCard from "./FollowCard";
-import { getCurrentUser } from "@/services/AuthService";
-import { getMyUserData } from "@/services/ProfileService";
+
 
 interface Ifollow {
   _id: string;

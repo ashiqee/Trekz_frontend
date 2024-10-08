@@ -1,9 +1,7 @@
 export type SiteConfig = typeof siteConfig;
-import { Bell, Contact, HelpCircleIcon, House, Info, LayoutGrid, Settings, User, Verified } from "lucide-react";
+import { Contact, HelpCircleIcon, Info, Settings, User, Verified } from "lucide-react";
 import { FaGlobe, FaAd, FaHeadset, FaCheckCircle, FaRocket, FaBook, FaUserCog, FaChartLine, FaHandsHelping, FaLock, FaCalendarAlt, FaNetworkWired, FaShieldAlt, FaUsers, FaStar } from 'react-icons/fa';
 
-import NotificationModal from "@/components/modal/NotificationModal"
-import MenuCard from "@/components/shared/MenuCard";
 export const siteConfig = {
   name: "Next.js + NextUI",
   description: "Make beautiful websites regardless of your design experience.",

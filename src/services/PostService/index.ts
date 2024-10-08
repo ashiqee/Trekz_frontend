@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "../AuthService";
 
 import axiosInstance from "@/lib/AxiosInstance";
-import envConfig from "@/config/envConfig";
 import nexiosInstance from "@/config/naxios.config";
 
 
@@ -73,22 +72,20 @@ export const getAllPosts = async (query:Record<any,any>) => {
   };
   const queryString = new URLSearchParams(query).toString()
 
- 
+
+
   
-  const res = await fetch(`${envConfig.baseApi}/posts?${queryString}`, fetchOptions);
+   const res = await axiosInstance.get(`/posts?${queryString}`);
 
 
-  if (!res.ok) {
+  if (!res) {
     throw new Error('Failed to fetch posts');
   }
-
-
-
  
-
-
-  return res.json();
+  return res.data;
 };
+
+
 
 
 // get single post details 

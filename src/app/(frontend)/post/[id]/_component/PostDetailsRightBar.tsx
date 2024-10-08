@@ -1,13 +1,13 @@
 "use client";
-import PostActionDropDown from "@/components/cards/cardsComp/PostActionDropDown";
-import DeletePostModal from "@/components/modal/DeletePostModal";
-import EditPostModal from "@/components/modal/EditPostModal";
-import { IPost } from "@/types";
 import { Avatar, Tooltip } from "@nextui-org/react";
 import { Globe, Verified, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
+
+import EditPostModal from "@/components/modal/EditPostModal";
+import DeletePostModal from "@/components/modal/DeletePostModal";
+import PostActionDropDown from "@/components/cards/cardsComp/PostActionDropDown";
 
 const PostDetailsRightBar = ({ post }:{post:any}) => {
     const searchParams = useSearchParams(); 

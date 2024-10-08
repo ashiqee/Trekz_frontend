@@ -69,7 +69,7 @@ const LoginContent = () => {
             className="border-none bg-background/60 dark:bg-default-100/50"
             shadow="md"
           >
-            <CardBody className="p-10 min-w-[40vw] md:p-20 2xl:px-40">
+            <CardBody className="p-10 min-w-[40vw] md:p-20 2xl:px-40 text-center">
               <div className="flex-col flex justify-center items-center text-center pb-5">
                 <Link href={"/"}>
                   <h2 className="text-3xl text-center font-bold uppercase">
@@ -112,6 +112,8 @@ const LoginContent = () => {
                   </Link>
                 </p>
               </TRForm>
+
+              <Link className="text-center" href="/reset-password">Forgot password?</Link>
             </CardBody>
           </Card>
         </motion.div>
